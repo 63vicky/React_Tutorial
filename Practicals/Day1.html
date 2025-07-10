@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>React Practical Task - Day 1 (JSX to Class Components)</title>
+    <style>
+      body {
+        font-family: 'Segoe UI', 'Noto Sans Devanagari', Arial, sans-serif;
+        line-height: 1.6;
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 20px;
+        color: #333;
+        background-color: #f9f9f9;
+      }
+      h1 {
+        color: #2c3e50;
+        border-bottom: 2px solid #3498db;
+        padding-bottom: 10px;
+      }
+      .task-container {
+        background: white;
+        border-radius: 8px;
+        padding: 20px;
+        margin-bottom: 20px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      }
+      .task-title {
+        color: #e74c3c;
+        display: flex;
+        align-items: center;
+        margin-top: 0;
+      }
+      .task-icon {
+        margin-right: 10px;
+        font-size: 1.2em;
+      }
+      code {
+        /* background: #f4f4f4; */
+        padding: 2px 5px;
+        border-radius: 3px;
+        font-family: Consolas, monospace;
+      }
+      pre {
+        background: #384558;
+        color: #f8f8f2;
+        padding: 15px;
+        border-radius: 5px;
+        overflow-x: auto;
+        tab-size: 2;
+      }
+      .expected-output {
+        background: #e8f8f5;
+        padding: 15px;
+        border-radius: 5px;
+        margin-top: 15px;
+      }
+      .bonus {
+        border-left: 4px solid #f39c12;
+        padding-left: 15px;
+      }
+      .homework {
+        background: #eaf7fd;
+        padding: 15px;
+        border-radius: 5px;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>🧪 React Practical Task – Day 1 (JSX to Class Components)</h1>
+    <p><strong>🕐 Estimated Time:</strong> 30–40 minutes</p>
+    <p>
+      <strong>🎯 Objective:</strong> To practically understand JSX and Class
+      components
+    </p>
+
+    <div class="task-container">
+      <h2 class="task-title">
+        <span class="task-icon">🧩</span> Task 1: JSX Expressions and Styling
+      </h2>
+      <p>Reproduce the following JSX code in <code>App.jsx</code>:</p>
+
+      <pre><code>const name = "Vicky";
+const age = 22;
+const myStyle = { color: "blue", fontSize: "20px" };
+
+function App() {
+  return (
+    &lt;div&gt;
+      &lt;h1&gt;Hello {name}!&lt;/h1&gt;
+      &lt;p style={myStyle}&gt;You are {age} years old.&lt;/p&gt;
+    &lt;/div&gt;
+  );
+}</code></pre>
+
+      <div class="expected-output">
+        <h3>📌 Expected Output:</h3>
+        <p>
+          The screen should display "Hello Vicky!" and "You are 22 years old."
+          with the text in blue color.
+        </p>
+      </div>
+    </div>
+
+    <div class="task-container">
+      <h2 class="task-title">
+        <span class="task-icon">🧩</span> Task 2: JSX + JavaScript Function
+      </h2>
+      <p>Create a function that returns a string</p>
+      <p>Call that function inside JSX</p>
+
+      <pre><code>function greetUser(name) {
+  return `Hello, ${name}! Welcome to React.`;
+}
+
+function App() {
+  return &lt;h2&gt;{greetUser("Vicky")}&lt;/h2&gt;;
+}</code></pre>
+
+      <div class="expected-output">
+        <h3>📌 Expected Output:</h3>
+        <p>Hello, Vicky! Welcome to React.</p>
+      </div>
+    </div>
+
+    <div class="task-container">
+      <h2 class="task-title">
+        <span class="task-icon">🧩</span> Task 3: Create a Class Component
+      </h2>
+      <p>Create a new file: <code>WelcomeClass.jsx</code></p>
+      <p>Write the following class component in it:</p>
+
+      <pre><code>import React, { Component } from "react";
+
+class WelcomeClass extends Component {
+  render() {
+    return &lt;h3&gt;Welcome from Class Component!&lt;/h3&gt;;
+  }
+}
+
+export default WelcomeClass;</code></pre>
+
+      <p>Import and use it in <code>App.jsx</code>:</p>
+
+      <pre><code>import WelcomeClass from "./WelcomeClass";
+
+function App() {
+  return (
+    &lt;div&gt;
+      &lt;WelcomeClass /&gt;
+    &lt;/div&gt;
+  );
+}</code></pre>
+
+      <div class="expected-output">
+        <h3>📌 Expected Output:</h3>
+        <p>Welcome from Class Component!</p>
+      </div>
+    </div>
+
+    <div class="task-container bonus">
+      <h2 class="task-title">
+        <span class="task-icon">⭐</span> Bonus Challenge (Optional)
+      </h2>
+      <p>
+        Create a <code>Profile.jsx</code> component that shows name and age
+        using only constant values (no props):
+      </p>
+
+      <pre><code>// Expected output:
+&lt;h2&gt;My name is Vicky&lt;/h2&gt;
+&lt;p&gt;I am 22 years old&lt;/p&gt;</code></pre>
+    </div>
+
+    <div class="homework">
+      <h2>📚 Homework</h2>
+      <ul>
+        <li>Read the "React Props" and "React Events" sections on W3Schools</li>
+        <li>
+          Understand how to pass props in functional and class components in
+          React
+        </li>
+      </ul>
+    </div>
+
+    <script>
+      document.addEventListener('DOMContentLoaded', function () {
+        console.log('Practical task document ready');
+      });
+    </script>
+  </body>
+</html>
