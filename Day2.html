@@ -3,7 +3,9 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>React.js लेक्चर 2 – useState, Events और Dynamic Components</title>
+    <title>
+      React.js Lecture - Day 2: useState, Events, Dynamic Components
+    </title>
     <style>
       body {
         font-family: 'Segoe UI', 'Noto Sans Devanagari', Arial, sans-serif;
@@ -12,26 +14,60 @@
         margin: 0 auto;
         padding: 20px;
         color: #333;
+        background-color: #f9f9f9;
       }
       h1 {
         color: #2c3e50;
         border-bottom: 2px solid #3498db;
         padding-bottom: 10px;
       }
-      h2 {
-        color: #2980b9;
-        margin-top: 25px;
+      .time-section {
+        background: white;
+        border-radius: 8px;
+        padding: 20px;
+        margin-bottom: 20px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
       }
-      blockquote {
-        background: #f9f9f9;
-        border-left: 4px solid #3498db;
-        padding: 10px 15px;
-        margin: 20px 0;
+      .time-marker {
+        font-weight: bold;
+        color: #e74c3c;
+        display: flex;
+        align-items: center;
+        margin-top: 0;
+      }
+      .time-icon {
+        margin-right: 10px;
+        font-size: 1.2em;
+      }
+      code {
+        /* background: #f4f4f4; */
+        padding: 2px 5px;
+        border-radius: 3px;
+        font-family: Consolas, monospace;
+      }
+      pre {
+        background: #384558;
+        color: #f8f8f2;
+        padding: 15px;
+        border-radius: 5px;
+        overflow-x: auto;
+        tab-size: 2;
+      }
+      .task {
+        background: #eaf7fd;
+        padding: 15px;
+        border-radius: 5px;
+        margin-top: 15px;
+      }
+      .homework {
+        background: #e8f8f5;
+        padding: 15px;
+        border-radius: 5px;
       }
       table {
         width: 100%;
         border-collapse: collapse;
-        margin: 20px 0;
+        margin: 15px 0;
       }
       th,
       td {
@@ -42,71 +78,30 @@
       th {
         background-color: #f2f2f2;
       }
-      code {
-        background: #f4f4f4;
-        padding: 2px 5px;
-        border-radius: 3px;
-        font-family: Consolas, monospace;
-      }
-      pre {
-        background: #f4f4f4;
-        padding: 10px;
-        border-radius: 5px;
-        overflow-x: auto;
-      }
-      .time-marker {
-        font-weight: bold;
-        color: #e74c3c;
-      }
-      .task {
-        background: #eaf7fd;
-        padding: 15px;
-        border-radius: 5px;
-        margin: 15px 0;
-      }
-      .homework {
-        background: #e8f8f5;
-        padding: 15px;
-        border-radius: 5px;
-        margin: 15px 0;
-      }
     </style>
   </head>
   <body>
-    <h1>🧑‍🏫 React.js लेक्चर 2 – useState, Events और Dynamic Components</h1>
-    <p><strong>समय:</strong> 1 घंटा</p>
-    <p><strong>उद्देश्य:</strong></p>
-    <ul>
-      <li>React में dynamic UI बनाना</li>
-      <li>useState hook की समझ</li>
-      <li>Event handling (बटन क्लिक आदि)</li>
-    </ul>
+    <h1>📘 React.js Lecture - Day 2</h1>
+    <p><strong>Topics:</strong> useState, Events, Dynamic Components</p>
+    <p><strong>Duration:</strong> 1 Hour</p>
 
-    <h2>
-      <span class="time-marker">🕘 [0–10 मिनट]</span> – पिछली क्लास का रिवीजन +
-      आज का उद्देश्य
-    </h2>
-    <blockquote>
+    <div class="time-section">
+      <h2 class="time-marker">
+        <span class="time-icon">🕘</span> [0–10 मिनट] – पिछली क्लास का रिवीजन
+      </h2>
+      <p>JSX, expressions, attributes और class components की समझ।</p>
+    </div>
+
+    <div class="time-section">
+      <h2 class="time-marker">
+        <span class="time-icon">🕙</span> [10–25 मिनट] – useState Hook
+      </h2>
       <p>
-        "पिछली क्लास में हमने देखा React क्या है, JSX क्या होता है, और
-        Components व Props कैसे काम करते हैं। आज हम सीखेंगे React को dynamic
-        कैसे बनाते हैं। इसके लिए हम सीखेंगे useState और Event Handling।"
+        <code>useState</code> React में component का internal state संभालने का
+        तरीका है।
       </p>
-    </blockquote>
 
-    <h2>
-      <span class="time-marker">🕙 [10–25 मिनट]</span> – useState क्या है?
-    </h2>
-    <blockquote>
-      <p>
-        "useState एक Hook है जिसका इस्तेमाल हम component में state यानी डेटा को
-        store और update करने के लिए करते हैं। जब state बदलती है, React component
-        को दोबारा render करता है।"
-      </p>
-    </blockquote>
-
-    <h3>सिंटैक्स:</h3>
-    <pre><code>import { useState } from 'react';
+      <pre><code>import { useState } from 'react';
 
 function Counter() {
   const [count, setCount] = useState(0);
@@ -118,108 +113,86 @@ function Counter() {
     &lt;/div&gt;
   );
 }</code></pre>
-
-    <h3>Key Points:</h3>
-    <ul>
-      <li>useState() के अंदर initial value देते हैं।</li>
-      <li>यह एक array return करता है: [value, setValue]</li>
-      <li>जब आप setValue() call करते हैं, React दोबारा UI render करता है।</li>
-    </ul>
-
-    <h2>
-      <span class="time-marker">🕥 [25–35 मिनट]</span> – Event Handling in React
-    </h2>
-    <blockquote>
-      <p>
-        "React में events (जैसे button click) को handle करना बहुत आसान है। ये
-        JavaScript में event handling जैसा ही होता है लेकिन JSX में camelCase
-        syntax इस्तेमाल होता है।"
-      </p>
-    </blockquote>
-
-    <h3>उदाहरण:</h3>
-    <pre><code>&lt;button onClick={handleClick}&gt;Click Me&lt;/button&gt;</code></pre>
-    <pre><code>function handleClick() {
-  alert("Button clicked!");
-}</code></pre>
-
-    <h3>अन्य Common Events:</h3>
-    <table>
-      <tr>
-        <th>Event</th>
-        <th>JSX में</th>
-      </tr>
-      <tr>
-        <td>Click</td>
-        <td>onClick</td>
-      </tr>
-      <tr>
-        <td>Change</td>
-        <td>onChange</td>
-      </tr>
-      <tr>
-        <td>Submit</td>
-        <td>onSubmit</td>
-      </tr>
-    </table>
-
-    <div class="task">
-      <h2>
-        <span class="time-marker">🕧 [35–50 मिनट]</span> – Hands-on Example:
-        Counter App
-      </h2>
-      <blockquote>
-        <p>
-          "चलिए मिलकर एक छोटा सा Counter App बनाते हैं जहाँ हम useState और
-          events दोनों का उपयोग करेंगे।"
-        </p>
-      </blockquote>
-
-      <h3>टास्क:</h3>
-      <ol>
-        <li>एक नया Component बनाएं: Counter.jsx</li>
-        <li>इसमें एक state हो: count, जो 0 से शुरू हो</li>
-        <li>दो बटन हों – Increase और Decrease</li>
-        <li>हर क्लिक पर count बढ़े या घटे</li>
-      </ol>
-
-      <h3>Expected Output:</h3>
-      <pre><code>&lt;p&gt;Count: 0&lt;/p&gt;
-&lt;button&gt;Increase&lt;/button&gt;
-&lt;button&gt;Decrease&lt;/button&gt;</code></pre>
     </div>
 
-    <div class="homework">
-      <h2>
-        <span class="time-marker">🕔 [50–60 मिनट]</span> – क्लास का समापन +
-        Homework
+    <div class="time-section">
+      <h2 class="time-marker">
+        <span class="time-icon">🕥</span> [25–35 मिनट] – Event Handling
       </h2>
-      <h3>Homework:</h3>
-      <ul>
-        <li>✅ एक और component बनाएँ: LikeButton</li>
-        <li>state: liked (boolean)</li>
-        <li>Button: अगर liked है तो "Liked ❤️" दिखे, नहीं तो "Like 🤍"</li>
-      </ul>
+      <p>JSX में events camelCase में लिखे जाते हैं।</p>
 
-      <h3>Bonus:</h3>
-      <ul>
-        <li>React DevTools Chrome Extension इंस्टॉल करें</li>
-        <li>onChange event की मदद से एक छोटा सा input फॉर्म बनाएं</li>
-      </ul>
+      <pre><code>function handleClick() {
+  alert("Button clicked!");
+}
 
-      <blockquote>
-        <p>🎯 <strong>अगले लेक्चर में:</strong></p>
+&lt;button onClick={handleClick}&gt;Click Me&lt;/button&gt;</code></pre>
+
+      <table>
+        <tr>
+          <th>Event</th>
+          <th>कब चलता है</th>
+        </tr>
+        <tr>
+          <td><code>onClick</code></td>
+          <td>क्लिक करने पर</td>
+        </tr>
+        <tr>
+          <td><code>onChange</code></td>
+          <td>इनपुट बदलने पर</td>
+        </tr>
+        <tr>
+          <td><code>onSubmit</code></td>
+          <td>फॉर्म सबमिट होने पर</td>
+        </tr>
+      </table>
+    </div>
+
+    <div class="time-section">
+      <h2 class="time-marker">
+        <span class="time-icon">🕧</span> [35–50 मिनट] – Practical: Counter App
+      </h2>
+      <div class="task">
+        <p>
+          <strong>Task:</strong> एक Counter बनाएँ जिसमें 2 बटन हों – Increase और
+          Decrease।
+        </p>
+
+        <pre><code>&lt;p&gt;Count: 0&lt;/p&gt;
+&lt;button&gt;Increase&lt;/button&gt;
+&lt;button&gt;Decrease&lt;/button&gt;</code></pre>
+      </div>
+    </div>
+
+    <div class="time-section">
+      <h2 class="time-marker">
+        <span class="time-icon">🕔</span> [50–60 मिनट] – Homework + Recap
+      </h2>
+      <div class="homework">
+        <h3>Homework:</h3>
         <ul>
-          <li>useEffect Hook</li>
-          <li>Component Lifecycle</li>
-          <li>Basic form handling</li>
+          <li>Component बनाएँ: <code>LikeButton</code></li>
+          <li>State: <code>liked</code> (boolean)</li>
+          <li>अगर liked है तो "Liked ❤️", नहीं तो "Like 🤍"</li>
         </ul>
-      </blockquote>
+
+        <h3>Bonus:</h3>
+        <ul>
+          <li>React DevTools इंस्टॉल करें</li>
+          <li>Input फॉर्म पर <code>onChange</code> का प्रयोग करें</li>
+        </ul>
+
+        <h3>🎯 Next Lecture:</h3>
+        <ul>
+          <li><code>useEffect</code> Hook</li>
+          <li>Component Lifecycle</li>
+          <li>Form Handling</li>
+        </ul>
+      </div>
     </div>
 
     <script>
       document.addEventListener('DOMContentLoaded', function () {
-        console.log('Document ready for PDF printing');
+        console.log('Lecture Day 2 document ready');
       });
     </script>
   </body>

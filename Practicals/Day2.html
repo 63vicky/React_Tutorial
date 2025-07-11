@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>React Practical - Day 2: Props, useState, useEffect</title>
+    <style>
+      body {
+        font-family: 'Segoe UI', 'Noto Sans Devanagari', Arial, sans-serif;
+        line-height: 1.6;
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 20px;
+        color: #333;
+        background-color: #f9f9f9;
+      }
+      h1 {
+        color: #2c3e50;
+        border-bottom: 2px solid #3498db;
+        padding-bottom: 10px;
+      }
+      .question {
+        background: white;
+        border-radius: 8px;
+        padding: 20px;
+        margin-bottom: 20px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      }
+      .question-title {
+        color: #e74c3c;
+        display: flex;
+        align-items: center;
+        margin-top: 0;
+      }
+      .question-icon {
+        margin-right: 10px;
+        font-size: 1.2em;
+      }
+      code {
+        background: #f4f4f4;
+        padding: 2px 5px;
+        border-radius: 3px;
+        font-family: Consolas, monospace;
+      }
+      .expected-output {
+        background: #e8f8f5;
+        padding: 15px;
+        border-radius: 5px;
+        margin-top: 15px;
+      }
+      .homework {
+        background: #eaf7fd;
+        padding: 15px;
+        border-radius: 5px;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>📝 React Practical – Day 2</h1>
+    <p><strong>Topics:</strong> Props, useState, useEffect</p>
+
+    <div class="question">
+      <h2 class="question-title">
+        <span class="question-icon">🔹</span> Question 1: Welcome Card with
+        Props
+      </h2>
+      <p>Create a component named <code>WelcomeCard</code>.</p>
+      <p>
+        This component should take <code>name</code> and <code>message</code> as
+        props and display them.
+      </p>
+
+      <div class="expected-output">
+        <h3>🎯 Expected Output:</h3>
+        <pre>
+Welcome, Vicky!
+You have successfully logged in!</pre
+        >
+      </div>
+    </div>
+
+    <div class="question">
+      <h2 class="question-title">
+        <span class="question-icon">🔹</span> Question 2: Counter with useState
+      </h2>
+      <p>
+        Create a <code>Counter</code> component with two buttons: Increment and
+        Decrement.
+      </p>
+      <p>Use <code>useState</code> to increase and decrease the count.</p>
+
+      <div class="expected-output">
+        <h3>🎯 Expected Output:</h3>
+        <pre>
+Count: 0
+[Increment] [Decrement]</pre
+        >
+        <p>The count should change with the buttons.</p>
+      </div>
+    </div>
+
+    <div class="question">
+      <h2 class="question-title">
+        <span class="question-icon">🔹</span> Question 3: Clock with useEffect
+      </h2>
+      <p>
+        Create a <code>Clock</code> component that updates the time every
+        second.
+      </p>
+      <p>Use <code>useEffect</code> and <code>setInterval</code>.</p>
+
+      <div class="expected-output">
+        <h3>🎯 Expected Output:</h3>
+        <pre>Current Time: 14:25:36</pre>
+        <p>The time should update every second.</p>
+      </div>
+    </div>
+
+    <div class="homework">
+      <h2>📚 Homework</h2>
+      <p>
+        Create a component named <code>UserCard</code> that displays name, age,
+        and location from props.
+      </p>
+      <p>
+        Use <code>useEffect</code> to log "UserCard rendered" in the console.
+      </p>
+    </div>
+  </body>
+</html>

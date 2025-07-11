@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="hi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>React Practical - Day 2 Answers</title>
+    <style>
+      body {
+        font-family: 'Segoe UI', 'Noto Sans Devanagari', Arial, sans-serif;
+        line-height: 1.6;
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 20px;
+        color: #333;
+        background-color: #f9f9f9;
+      }
+      h1 {
+        color: #2c3e50;
+        text-align: center;
+        margin-bottom: 30px;
+      }
+      .answer-section {
+        background: white;
+        border-radius: 8px;
+        padding: 20px;
+        margin-bottom: 20px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      }
+      .answer-title {
+        color: #27ae60;
+        display: flex;
+        align-items: center;
+        margin-top: 0;
+      }
+      .answer-icon {
+        margin-right: 10px;
+      }
+      pre {
+        background: #2d2d2d;
+        color: #f8f8f2;
+        padding: 15px;
+        border-radius: 5px;
+        overflow-x: auto;
+        tab-size: 2;
+        font-family: Consolas, monospace;
+      }
+      .homework-answer {
+        border-left: 4px solid #3498db;
+        padding-left: 15px;
+        margin-top: 30px;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>✅ React Practical – Day 2 (Answers)</h1>
+
+    <div class="answer-section">
+      <h2 class="answer-title">
+        <span class="answer-icon">🔹</span> Answer 1: WelcomeCard.jsx
+      </h2>
+      <pre><code>function WelcomeCard(props) {
+  return (
+    &lt;div&gt;
+      &lt;h2&gt;Welcome, {props.name}!&lt;/h2&gt;
+      &lt;p&gt;{props.message}&lt;/p&gt;
+    &lt;/div&gt;
+  );
+}
+
+export default WelcomeCard;</code></pre>
+    </div>
+
+    <div class="answer-section">
+      <h2 class="answer-title">
+        <span class="answer-icon">🔹</span> Answer 2: Counter.jsx
+      </h2>
+      <pre><code>import { useState } from "react";
+
+function Counter() {
+  const [count, setCount] = useState(0);
+
+  return (
+    &lt;div&gt;
+      &lt;h3&gt;Count: {count}&lt;/h3&gt;
+      &lt;button onClick={() => setCount(count + 1)}&gt;Increment&lt;/button&gt;
+      &lt;button onClick={() => setCount(count - 1)}&gt;Decrement&lt;/button&gt;
+    &lt;/div&gt;
+  );
+}
+
+export default Counter;</code></pre>
+    </div>
+
+    <div class="answer-section">
+      <h2 class="answer-title">
+        <span class="answer-icon">🔹</span> Answer 3: Clock.jsx
+      </h2>
+      <pre><code>import { useState, useEffect } from "react";
+
+function Clock() {
+  const [time, setTime] = useState(new Date().toLocaleTimeString());
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setTime(new Date().toLocaleTimeString());
+    }, 1000);
+
+    return () => clearInterval(timer);
+  }, []);
+
+  return &lt;h2&gt;Current Time: {time}&lt;/h2&gt;;
+}
+
+export default Clock;</code></pre>
+    </div>
+
+    <div class="homework-answer">
+      <h2>📚 Homework Answer: UserCard.jsx</h2>
+      <pre><code>import { useEffect } from "react";
+
+function UserCard(props) {
+  useEffect(() => {
+    console.log("UserCard rendered");
+  }, []);
+
+  return (
+    &lt;div&gt;
+      &lt;h2&gt;Name: {props.name}&lt;/h2&gt;
+      &lt;p&gt;Age: {props.age}&lt;/p&gt;
+      &lt;p&gt;Location: {props.location}&lt;/p&gt;
+    &lt;/div&gt;
+  );
+}
+
+export default UserCard;</code></pre>
+    </div>
+  </body>
+</html>
