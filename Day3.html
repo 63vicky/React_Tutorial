@@ -1,37 +1,85 @@
 <!DOCTYPE html>
-<html lang="hi">
+<html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>React.js लेक्चर 3 – useEffect, Lifecycle और Form Handling</title>
+    <title>React Class Plan - Day 4: Events, Conditionals, Lists</title>
     <style>
       body {
-        font-family: 'Segoe UI', 'Noto Sans Devanagari', Arial, sans-serif;
+        font-family: 'Segoe UI', Arial, sans-serif;
         line-height: 1.6;
         max-width: 800px;
         margin: 0 auto;
         padding: 20px;
         color: #333;
+        background-color: #f9f9f9;
+      }
+      h1,
+      h2 {
+        color: #2c3e50;
       }
       h1 {
-        color: #2c3e50;
         border-bottom: 2px solid #3498db;
         padding-bottom: 10px;
       }
-      h2 {
-        color: #2980b9;
-        margin-top: 25px;
+      .time-section {
+        background: white;
+        border-radius: 8px;
+        padding: 20px;
+        margin-bottom: 20px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
       }
-      blockquote {
-        background: #f9f9f9;
-        border-left: 4px solid #3498db;
-        padding: 10px 15px;
+      .time-marker {
+        font-weight: bold;
+        color: #e74c3c;
+        display: flex;
+        align-items: center;
+      }
+      .time-icon {
+        margin-right: 10px;
+        font-size: 1.2em;
+      }
+      .language-toggle {
+        text-align: center;
         margin: 20px 0;
+      }
+      .language-btn {
+        padding: 8px 16px;
+        background: #3498db;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+      }
+      code {
+        /* background: #f4f4f4; */
+        padding: 2px 5px;
+        border-radius: 3px;
+        font-family: Consolas, monospace;
+      }
+      pre {
+        background: #384558;
+        color: #f8f8f2;
+        padding: 15px;
+        border-radius: 5px;
+        overflow-x: auto;
+        tab-size: 2;
+      }
+      .task {
+        background: #eaf7fd;
+        padding: 15px;
+        border-radius: 5px;
+        margin-top: 15px;
+      }
+      .homework {
+        background: #e8f8f5;
+        padding: 15px;
+        border-radius: 5px;
       }
       table {
         width: 100%;
         border-collapse: collapse;
-        margin: 20px 0;
+        margin: 15px 0;
       }
       th,
       td {
@@ -42,209 +90,267 @@
       th {
         background-color: #f2f2f2;
       }
-      code {
-        background: #f4f4f4;
-        padding: 2px 5px;
-        border-radius: 3px;
-        font-family: Consolas, monospace;
+      .hindi {
+        display: block;
       }
-      pre {
-        background: #f4f4f4;
-        padding: 10px;
-        border-radius: 5px;
-        overflow-x: auto;
-      }
-      .time-marker {
-        font-weight: bold;
-        color: #e74c3c;
-      }
-      .task {
-        background: #eaf7fd;
-        padding: 15px;
-        border-radius: 5px;
-        margin: 15px 0;
-      }
-      .homework {
-        background: #e8f8f5;
-        padding: 15px;
-        border-radius: 5px;
-        margin: 15px 0;
-      }
-      .brain-icon {
-        font-size: 1.2em;
-        margin-right: 5px;
+      .english {
+        display: none;
       }
     </style>
   </head>
   <body>
-    <h1>🧑‍🏫 React.js लेक्चर 3 – useEffect, Lifecycle और Form Handling</h1>
-    <p><strong>समय:</strong> 1 घंटा</p>
-    <p>
-      <strong>उद्देश्य:</strong> React component के behavior को external events
-      से जोड़ना (जैसे API call, Timer), और Forms से डेटा लेना।
-    </p>
-
-    <h2>
-      <span class="time-marker">🕘 [0–10 मिनट]</span> – पिछली क्लास का रिवीजन +
-      Agenda
-    </h2>
-    <blockquote>
-      <p>
-        "पिछली बार हमने React में useState और Events के बारे में सीखा था। आज हम
-        समझेंगे कि किसी component के बनने, update होने और हटने पर हम कैसे React
-        को कुछ काम करने को कहते हैं – इसके लिए आता है useEffect।"
-      </p>
-    </blockquote>
-
-    <h2>
-      <span class="time-marker">🕙 [10–25 मिनट]</span> – useEffect क्या है?
-    </h2>
-    <blockquote>
-      <p>
-        "useEffect एक Hook है जो किसी component के lifecycle events को handle
-        करता है।"
-      </p>
-    </blockquote>
-
-    <h3><span class="brain-icon">🧠</span> सामान्य उपयोग:</h3>
-    <ul>
-      <li>API से डेटा लाना</li>
-      <li>DOM को manually बदलना</li>
-      <li>setInterval या setTimeout</li>
-    </ul>
-
-    <h3>📘 Basic Syntax:</h3>
-    <pre><code>import { useEffect } from 'react';
-
-useEffect(() => {
-  // यह कोड component के render होने पर चलता है
-}, []);</code></pre>
-
-    <p>
-      <code>[]</code> (dependency array) का मतलब है: सिर्फ एक बार चले
-      (componentDidMount की तरह)
-    </p>
-
-    <h3>✅ उदाहरण: एक बार Alert दिखाएँ</h3>
-    <pre><code>useEffect(() => {
-  alert("Welcome to React useEffect!");
-}, []);</code></pre>
-
-    <h3>✅ उदाहरण: हर बार count बदले तो log करें</h3>
-    <pre><code>useEffect(() => {
-  console.log("Count updated:", count);
-}, [count]);</code></pre>
-
-    <h3>📊 Dependency Array का मतलब:</h3>
-    <table>
-      <tr>
-        <th>Dependency</th>
-        <th>कब useEffect चलेगा?</th>
-      </tr>
-      <tr>
-        <td><code>[]</code></td>
-        <td>सिर्फ पहली बार (mount)</td>
-      </tr>
-      <tr>
-        <td><code>[state]</code></td>
-        <td>जब वो state बदले</td>
-      </tr>
-      <tr>
-        <td>कुछ नहीं</td>
-        <td>हर render पर</td>
-      </tr>
-    </table>
-
-    <h2>
-      <span class="time-marker">🕥 [25–40 मिनट]</span> – React में Form Handling
-    </h2>
-    <blockquote>
-      <p>
-        "अब हम React में input लेना सीखेंगे — जैसे किसी form से user का नाम लेना
-        और उसे submit करना।"
-      </p>
-    </blockquote>
-
-    <h3>Controlled Component Example:</h3>
-    <pre><code>function Form() {
-  const [name, setName] = useState("");
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    alert(`Welcome, ${name}!`);
-  };
-
-  return (
-    &lt;form onSubmit={handleSubmit}&gt;
-      &lt;input 
-        type="text" 
-        value={name} 
-        onChange={(e) => setName(e.target.value)} 
-      /&gt;
-      &lt;button type="submit"&gt;Submit&lt;/button&gt;
-    &lt;/form&gt;
-  );
-}</code></pre>
-
-    <h3>☑ क्या सीखा?</h3>
-    <ul>
-      <li><code>value={state}</code> से controlled बनाया</li>
-      <li><code>onChange</code> से state अपडेट हुई</li>
-      <li><code>onSubmit</code> से फॉर्म संभाला</li>
-    </ul>
-
-    <div class="task">
-      <h2>
-        <span class="time-marker">🕢 [40–50 मिनट]</span> – Hands-on Task:
-        Welcome Form
-      </h2>
-      <ol>
-        <li>एक नया component बनाइए: <code>WelcomeForm.jsx</code></li>
-        <li>✅ User से नाम लें</li>
-        <li>✅ Submit पर "Welcome, नाम!" दिखाएं</li>
-        <li>
-          ✅ <code>useEffect</code> से console में "Form rendered" log करें
-        </li>
-      </ol>
+    <div class="language-toggle">
+      <button class="language-btn" onclick="toggleLanguage()">
+        Switch to English
+      </button>
     </div>
 
-    <div class="homework">
-      <h2>
-        <span class="time-marker">🕔 [50–60 मिनट]</span> – Homework + Doubt
-        Clearing
-      </h2>
-      <h3>📚 Homework:</h3>
-      <p>एक नया component बनाएँ: <code>TimerComponent.jsx</code></p>
-      <ul>
-        <li>जब component लोड हो तो एक <code>setInterval</code> शुरू हो</li>
-        <li>हर सेकंड पर count बढ़े (show: "Seconds passed: 1, 2, 3…")</li>
-        <li>
-          Unmount पर <code>clearInterval</code> हो (return function के साथ)
-        </li>
-      </ul>
+    <!-- Hindi Version -->
+    <div class="hindi" id="hindi-content">
+      <h1>🧑‍🏫 React Class Plan – Day 3</h1>
+      <p><strong>Topics:</strong> Events, Conditionals, Lists</p>
+      <p><strong>Duration:</strong> 1 Hour</p>
+      <p>
+        <strong>Goal:</strong> Students UI को interactive बना सकें और loop +
+        logic के साथ डेटा show करना सीखें।
+      </p>
 
-      <pre><code>useEffect(() => {
-  const interval = setInterval(() => {
-    setCount(prev => prev + 1);
-  }, 1000);
+      <div class="time-section">
+        <h2 class="time-marker">
+          <span class="time-icon">⏱️</span> 0 – 10 मिनट: Recap + Intro
+        </h2>
+        <p>
+          पहले 2 मिनट में students से पूछिए कि useState और useEffect का उपयोग
+          कहाँ-कहाँ किया था?
+        </p>
+        <p>
+          फिर बताइए कि आज हम React को interactive और dynamic बनाएँगे — जैसे बटन
+          पर क्लिक करने से कुछ बदलना, या लिस्ट दिखाना।
+        </p>
+      </div>
 
-  return () => clearInterval(interval);
-}, []);</code></pre>
+      <div class="time-section">
+        <h2 class="time-marker">
+          <span class="time-icon">⏱️</span> 10 – 25 मिनट: React Events
+        </h2>
+        <p><span class="time-icon">🧠</span> Explain:</p>
+        <p>onClick, onChange, onSubmit कैसे काम करते हैं (JSX में camelCase)</p>
 
-      <blockquote>
-        <p>🎯 <strong>अगले लेक्चर में:</strong></p>
-        <ul>
-          <li>Props Drilling और Component Communication</li>
-          <li>Conditional Rendering</li>
-          <li>Lists और Keys का उपयोग</li>
-        </ul>
-      </blockquote>
+        <p><span class="time-icon">🔧</span> Demo Task:</p>
+        <pre><code>function handleClick() {
+  alert("Button clicked!");
+}
+
+return &lt;button onClick={handleClick}&gt;Click Me&lt;/button&gt;;</code></pre>
+
+        <div class="task">
+          <p><span class="time-icon">🧪</span> Real task:</p>
+          <p>
+            एक बटन बनाइए जो क्लिक करने पर count बढ़ाए और console में "Clicked"
+            log करे।
+          </p>
+        </div>
+      </div>
+
+      <div class="time-section">
+        <h2 class="time-marker">
+          <span class="time-icon">⏱️</span> 25 – 40 मिनट: Conditional Rendering
+        </h2>
+        <p><span class="time-icon">🧠</span> Explain:</p>
+        <p>if, ? :, && ऑपरेटर से JSX में condition दिखाना</p>
+
+        <p><span class="time-icon">🔧</span> Demo Task:</p>
+        <pre><code>const isLoggedIn = true;
+
+return (
+  &lt;div&gt;
+    {isLoggedIn ? &lt;h2&gt;Welcome Back!&lt;/h2&gt; : &lt;h2&gt;Please Login&lt;/h2&gt;}
+  &lt;/div&gt;
+);</code></pre>
+
+        <div class="task">
+          <p><span class="time-icon">🧪</span> Task:</p>
+          <p>एक state बनाएँ: show, और बटन क्लिक से true/false करें।</p>
+          <p>जब show true हो तो "Hello User", और false पर कुछ न दिखे।</p>
+        </div>
+      </div>
+
+      <div class="time-section">
+        <h2 class="time-marker">
+          <span class="time-icon">⏱️</span> 40 – 55 मिनट: List Rendering
+        </h2>
+        <p><span class="time-icon">🧠</span> Explain:</p>
+        <p>.map() से array को component में convert करना</p>
+        <p>key prop क्यों ज़रूरी है?</p>
+
+        <p><span class="time-icon">🔧</span> Demo Task:</p>
+        <pre><code>const fruits = ["Apple", "Banana", "Mango"];
+
+return (
+  &lt;ul&gt;
+    {fruits.map((item, index) => (
+      &lt;li key={index}&gt;{item}&lt;/li&gt;
+    ))}
+  &lt;/ul&gt;
+);</code></pre>
+
+        <div class="task">
+          <p><span class="time-icon">🧪</span> Task:</p>
+          <p>
+            एक array बनाइए जिसमें students के नाम हों और उसे list में दिखाइए।
+          </p>
+        </div>
+      </div>
+
+      <div class="time-section">
+        <h2 class="time-marker">
+          <span class="time-icon">⏱️</span> 55 – 60 मिनट: Q&A + Homework
+        </h2>
+        <p>किसी को कोई doubt हो तो पूछें</p>
+
+        <div class="homework">
+          <p>Homework दें:</p>
+          <ul>
+            <li>
+              एक task list बनाएँ जो conditionally complete/incomplete दिखे
+            </li>
+            <li>Bonus: list में remove बटन लगाइए</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- English Version -->
+    <div class="english" id="english-content">
+      <h1>🧑‍🏫 React Class Plan – Day 3</h1>
+      <p><strong>Topics:</strong> Events, Conditionals, Lists</p>
+      <p><strong>Duration:</strong> 1 Hour</p>
+      <p>
+        <strong>Goal:</strong> Students should be able to make UI interactive
+        and learn to display data with loops + logic.
+      </p>
+
+      <div class="time-section">
+        <h2 class="time-marker">
+          <span class="time-icon">⏱️</span> 0 – 10 mins: Recap + Intro
+        </h2>
+        <p>
+          First 2 minutes: Ask students where they used useState and useEffect
+          previously.
+        </p>
+        <p>
+          Then explain that today we'll make React interactive and dynamic -
+          like changing something on button click, or displaying lists.
+        </p>
+      </div>
+
+      <div class="time-section">
+        <h2 class="time-marker">
+          <span class="time-icon">⏱️</span> 10 – 25 mins: React Events
+        </h2>
+        <p><span class="time-icon">🧠</span> Explain:</p>
+        <p>How onClick, onChange, onSubmit work (camelCase in JSX)</p>
+
+        <p><span class="time-icon">🔧</span> Demo Task:</p>
+        <pre><code>function handleClick() {
+  alert("Button clicked!");
+}
+
+return &lt;button onClick={handleClick}&gt;Click Me&lt;/button&gt;;</code></pre>
+
+        <div class="task">
+          <p><span class="time-icon">🧪</span> Real task:</p>
+          <p>
+            Create a button that increases count on click and logs "Clicked" to
+            console.
+          </p>
+        </div>
+      </div>
+
+      <div class="time-section">
+        <h2 class="time-marker">
+          <span class="time-icon">⏱️</span> 25 – 40 mins: Conditional Rendering
+        </h2>
+        <p><span class="time-icon">🧠</span> Explain:</p>
+        <p>Showing conditions in JSX using if, ? :, && operators</p>
+
+        <p><span class="time-icon">🔧</span> Demo Task:</p>
+        <pre><code>const isLoggedIn = true;
+
+return (
+  &lt;div&gt;
+    {isLoggedIn ? &lt;h2&gt;Welcome Back!&lt;/h2&gt; : &lt;h2&gt;Please Login&lt;/h2&gt;}
+  &lt;/div&gt;
+);</code></pre>
+
+        <div class="task">
+          <p><span class="time-icon">🧪</span> Task:</p>
+          <p>Create a state: show, and toggle true/false with button click.</p>
+          <p>
+            When show is true, display "Hello User", otherwise show nothing.
+          </p>
+        </div>
+      </div>
+
+      <div class="time-section">
+        <h2 class="time-marker">
+          <span class="time-icon">⏱️</span> 40 – 55 mins: List Rendering
+        </h2>
+        <p><span class="time-icon">🧠</span> Explain:</p>
+        <p>Converting arrays to components using .map()</p>
+        <p>Why key prop is important?</p>
+
+        <p><span class="time-icon">🔧</span> Demo Task:</p>
+        <pre><code>const fruits = ["Apple", "Banana", "Mango"];
+
+return (
+  &lt;ul&gt;
+    {fruits.map((item, index) => (
+      &lt;li key={index}&gt;{item}&lt;/li&gt;
+    ))}
+  &lt;/ul&gt;
+);</code></pre>
+
+        <div class="task">
+          <p><span class="time-icon">🧪</span> Task:</p>
+          <p>Create an array with student names and display them in a list.</p>
+        </div>
+      </div>
+
+      <div class="time-section">
+        <h2 class="time-marker">
+          <span class="time-icon">⏱️</span> 55 – 60 mins: Q&A + Homework
+        </h2>
+        <p>Answer any student doubts</p>
+
+        <div class="homework">
+          <p>Homework:</p>
+          <ul>
+            <li>
+              Create a task list that shows complete/incomplete conditionally
+            </li>
+            <li>Bonus: Add remove button to list items</li>
+          </ul>
+        </div>
+      </div>
     </div>
 
     <script>
-      document.addEventListener('DOMContentLoaded', function () {
-        console.log('Document ready for PDF printing');
-      });
+      function toggleLanguage() {
+        const hindiContent = document.getElementById('hindi-content');
+        const englishContent = document.getElementById('english-content');
+        const button = document.querySelector('.language-btn');
+
+        if (hindiContent.style.display === 'block') {
+          hindiContent.style.display = 'none';
+          englishContent.style.display = 'block';
+          button.textContent = 'Switch to Hindi';
+        } else {
+          hindiContent.style.display = 'block';
+          englishContent.style.display = 'none';
+          button.textContent = 'Switch to English';
+        }
+      }
     </script>
   </body>
 </html>

@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="hi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>React Practical Task - Day 3 (Solutions)</title>
+    <style>
+      body {
+        font-family: 'Segoe UI', 'Noto Sans Devanagari', Arial, sans-serif;
+        line-height: 1.6;
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 20px;
+        color: #333;
+        background-color: #f9f9f9;
+      }
+      h1 {
+        color: #2c3e50;
+        border-bottom: 2px solid #3498db;
+        padding-bottom: 10px;
+      }
+      .solution {
+        background: white;
+        border-radius: 8px;
+        padding: 20px;
+        margin-bottom: 20px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      }
+      .solution-title {
+        color: #27ae60;
+        display: flex;
+        align-items: center;
+      }
+      .solution-icon {
+        margin-right: 10px;
+      }
+      code {
+        /* background: #f4f4f4; */
+        padding: 2px 5px;
+        border-radius: 3px;
+        font-family: Consolas, monospace;
+      }
+      pre {
+        background: #384558;
+        color: #f8f8f2;
+        padding: 15px;
+        border-radius: 5px;
+        overflow-x: auto;
+        tab-size: 2;
+      }
+      .explanation {
+        background: #f5f5f5;
+        padding: 15px;
+        border-radius: 5px;
+        margin-top: 15px;
+      }
+      .homework-solution {
+        background: #eaf7fd;
+        padding: 20px;
+        border-radius: 5px;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>✅ React Practical Solutions – Day 3</h1>
+
+    <div class="solution">
+      <h2 class="solution-title">
+        <span class="solution-icon">🔹</span> Solution 1: Button Click Event
+      </h2>
+      <pre><code>import React from 'react';
+
+function App() {
+  const handleClick = () => {
+    console.log("Button Clicked!");
+    alert("You clicked the button!");
+  };
+
+  return (
+    &lt;div className="App"&gt;
+      &lt;button onClick={handleClick}&gt;Click Me&lt;/button&gt;
+    &lt;/div&gt;
+  );
+}
+
+export default App;</code></pre>
+
+      <div class="explanation">
+        <h3>💡 Explanation:</h3>
+        <p>
+          1. <code>handleClick</code> function में दो actions हैं - console.log
+          और alert
+        </p>
+        <p>
+          2. बटन के <code>onClick</code> event पर यह function attach किया गया है
+        </p>
+        <p>3. जब बटन क्लिक होगा, दोनों messages दिखेंगे</p>
+      </div>
+    </div>
+
+    <div class="solution">
+      <h2 class="solution-title">
+        <span class="solution-icon">🔹</span> Solution 2: Conditional Rendering
+      </h2>
+      <pre><code>import React, { useState } from 'react';
+
+function App() {
+  const [show, setShow] = useState(false);
+
+  return (
+    &lt;div className="App"&gt;
+      &lt;button onClick={() => setShow(!show)}&gt;
+        {show ? 'Hide Message' : 'Show Message'}
+      &lt;/button&gt;
+      {show && &lt;h2 style={{color: 'green'}}&gt;Hello User&lt;/h2&gt;}
+    &lt;/div&gt;
+  );
+}
+
+export default App;</code></pre>
+
+      <div class="explanation">
+        <h3>💡 Explanation:</h3>
+        <p>1. <code>show</code> state true/false के लिए बनाई गई है</p>
+        <p>2. बटन क्लिक पर state toggle होती है (<code>!show</code>)</p>
+        <p>
+          3. <code>{show && ...}</code> syntax से conditional rendering की गई है
+        </p>
+        <p>4. बटन का text भी condition के अनुसार बदलता है</p>
+      </div>
+    </div>
+
+    <div class="solution">
+      <h2 class="solution-title">
+        <span class="solution-icon">🔹</span> Solution 3: List Rendering
+      </h2>
+      <pre><code>import React from 'react';
+
+function App() {
+  const students = ["Vicky", "Riya", "Aman", "Priya", "Rahul"];
+
+  return (
+    &lt;div className="App"&gt;
+      &lt;h2&gt;Student List&lt;/h2&gt;
+      &lt;ul style={{textAlign: 'left'}}&gt;
+        {students.map((name, index) => (
+          &lt;li key={index}&gt;{name}&lt;/li&gt;
+        ))}
+      &lt;/ul&gt;
+    &lt;/div&gt;
+  );
+}
+
+export default App;</code></pre>
+
+      <div class="explanation">
+        <h3>💡 Explanation:</h3>
+        <p>1. <code>students</code> array में नाम store किए गए हैं</p>
+        <p>
+          2. <code>map()</code> method से हर नाम को <code>&lt;li&gt;</code> में
+          convert किया गया
+        </p>
+        <p>3. हर list item को unique <code>key</code> prop दिया गया है</p>
+        <p>4. Result एक unordered list के रूप में दिखेगा</p>
+      </div>
+    </div>
+
+    <div class="homework-solution">
+      <h2>📚 Homework Solution</h2>
+      <pre><code>import React, { useState } from 'react';
+
+function TaskList() {
+  const [tasks, setTasks] = useState([
+    { id: 1, text: "Buy Milk", completed: false },
+    { id: 2, text: "Go Gym", completed: false },
+    { id: 3, text: "Code React", completed: false }
+  ]);
+
+  const markComplete = (id) => {
+    setTasks(tasks.map(task => 
+      task.id === id ? {...task, completed: !task.completed} : task
+    ));
+  };
+
+  const removeTask = (id) => {
+    setTasks(tasks.filter(task => task.id !== id));
+  };
+
+  return (
+    &lt;div className="App"&gt;
+      &lt;h2&gt;Task List&lt;/h2&gt;
+      &lt;ul style={{listStyle: 'none', padding: 0}}&gt;
+        {tasks.map(task => (
+          &lt;li key={task.id} style={{
+            margin: '10px 0',
+            color: task.completed ? 'green' : 'black',
+            fontWeight: task.completed ? 'bold' : 'normal'
+          }}&gt;
+            {task.text}
+            &lt;button 
+              onClick={() => markComplete(task.id)}
+              style={{margin: '0 10px'}}
+            &gt;
+              {task.completed ? 'Undo' : 'Done'}
+            &lt;/button&gt;
+            &lt;button onClick={() => removeTask(task.id)}&gt;
+              Remove
+            &lt;/button&gt;
+          &lt;/li&gt;
+        ))}
+      &lt;/ul&gt;
+    &lt;/div&gt;
+  );
+}
+
+export default TaskList;</code></pre>
+
+      <div class="explanation">
+        <h3>💡 Explanation:</h3>
+        <p>
+          1. Tasks array में objects हैं जिनमें <code>completed</code> status है
+        </p>
+        <p>
+          2. "Done" बटन क्लिक पर <code>markComplete</code> function चलता है जो
+          status toggle करता है
+        </p>
+        <p>3. "Remove" बटन क्लिक पर item array से filter हो जाता है</p>
+        <p>4. Conditional styling से completed tasks green और bold दिखते हैं</p>
+      </div>
+    </div>
+  </body>
+</html>
