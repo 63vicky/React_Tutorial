@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="hi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>React Practical Tasks - List Rendering & Styling</title>
+    <style>
+      body {
+        font-family: 'Segoe UI', 'Noto Sans Devanagari', Arial, sans-serif;
+        line-height: 1.6;
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 20px;
+        color: #333;
+        background-color: #f9f9f9;
+      }
+      h1 {
+        color: #2c3e50;
+        border-bottom: 2px solid #3498db;
+        padding-bottom: 10px;
+      }
+      .task {
+        background: white;
+        border-radius: 8px;
+        padding: 20px;
+        margin-bottom: 20px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      }
+      .task-title {
+        color: #27ae60;
+        margin-top: 0;
+      }
+      .expected-output {
+        background: #e8f8f5;
+        padding: 15px;
+        border-radius: 5px;
+        margin-top: 15px;
+      }
+      ul {
+        padding-left: 20px;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>📘 React Practical Tasks – List Rendering & Styling</h1>
+
+    <div class="task">
+      <h2 class="task-title">✅ Practical Task 1: Basic List Rendering</h2>
+      <p>
+        <strong>Question:</strong> एक React component बनाइए जो एक array (fruits
+        = ['Apple', 'Banana', 'Mango']) को &lt;ul&gt; list में render करे।
+      </p>
+      <div class="expected-output">
+        <strong>Expected Output:</strong>
+        <ul>
+          <li>Apple</li>
+          <li>Banana</li>
+          <li>Mango</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="task">
+      <h2 class="task-title">✅ Practical Task 2: List with map() and key</h2>
+      <p>
+        <strong>Question:</strong> एक component बनाइए जो student names की list
+        (['Rahul', 'Sana', 'Kabir']) को render करे और हर item में React key use
+        करे।
+      </p>
+      <div class="expected-output">
+        <strong>Expected Output:</strong>
+        <ul>
+          <li>Rahul</li>
+          <li>Sana</li>
+          <li>Kabir</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="task">
+      <h2 class="task-title">✅ Practical Task 3: List of Objects</h2>
+      <p>
+        <strong>Question:</strong> Ek product list dikhaiye jisme array of
+        objects ho:
+      </p>
+      <p>
+        const products = [<br />
+        { id: 1, name: 'Mobile', price: 10000 },<br />
+        { id: 2, name: 'Laptop', price: 50000 }<br />
+        ];
+      </p>
+      <p>हर product को name और price के साथ &lt;li&gt; me render karein.</p>
+      <div class="expected-output">
+        <strong>Expected Output:</strong>
+        <ul>
+          <li>Mobile - ₹10000</li>
+          <li>Laptop - ₹50000</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="task">
+      <h2 class="task-title">
+        ✅ Practical Task 4: Conditional List Rendering
+      </h2>
+      <p><strong>Question:</strong> Ek array banaiye jisme online users ho:</p>
+      <p>const users = ['Ali', 'Pooja'];</p>
+      <p>
+        Agar array empty ho toh "No users online", aur agar users ho toh unki
+        list dikhaiye.
+      </p>
+      <div class="expected-output">
+        <strong>Expected Output (when users exist):</strong>
+        <ul>
+          <li>Ali</li>
+          <li>Pooja</li>
+        </ul>
+        <strong>Expected Output (when empty):</strong>
+        <p>No users online</p>
+      </div>
+    </div>
+
+    <h1>🎨 Styling Practical Tasks (React CSS)</h1>
+
+    <div class="task">
+      <h2 class="task-title">🎯 Practical Task 5: Inline Styling</h2>
+      <p>
+        <strong>Question:</strong> Ek &lt;h1&gt; tag me text render karein:
+        "Welcome to React", aur usme inline style lagaiye (color blue, fontSize
+        24px).
+      </p>
+      <div class="expected-output">
+        <strong>Expected Output:</strong>
+        <p>A heading in blue color and larger font.</p>
+      </div>
+    </div>
+
+    <div class="task">
+      <h2 class="task-title">🎯 Practical Task 6: CSS Class Styling</h2>
+      <p>
+        <strong>Question:</strong> Ek button banaiye jisme class btn-primary ho.
+        Yeh style CSS file me define ho:
+      </p>
+      <p>
+        .btn-primary {<br />
+        background-color: green;<br />
+        color: white;<br />
+        padding: 10px;<br />
+        }
+      </p>
+      <div class="expected-output">
+        <strong>Expected Output:</strong>
+        <p>A green button with white text.</p>
+      </div>
+    </div>
+
+    <div class="task">
+      <h2 class="task-title">🎯 Practical Task 7: Dynamic Styling</h2>
+      <p>
+        <strong>Question:</strong> Ek component banaiye jisme button pe click
+        karne se background color red se blue ho jaye.
+      </p>
+      <div class="expected-output">
+        <strong>Expected Output:</strong>
+        <p>Initially red background, after click it becomes blue.</p>
+      </div>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>React Practical Solutions - List Rendering & Styling</title>
+    <style>
+      body {
+        font-family: 'Segoe UI', Arial, sans-serif;
+        line-height: 1.6;
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 20px;
+        background-color: #f9f9f9;
+      }
+      h1 {
+        color: #2c3e50;
+        border-bottom: 2px solid #3498db;
+        padding-bottom: 10px;
+      }
+      .solution {
+        background: white;
+        border-radius: 8px;
+        padding: 20px;
+        margin-bottom: 20px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      }
+      .solution-title {
+        color: #27ae60;
+        margin-top: 0;
+      }
+      pre {
+        background: #2d2d2d;
+        color: #f8f8f2;
+        padding: 15px;
+        border-radius: 5px;
+        overflow-x: auto;
+        tab-size: 2;
+      }
+      .explanation {
+        background: #f5f5f5;
+        padding: 15px;
+        border-radius: 5px;
+        margin-top: 15px;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>✅ List Rendering – Practical Solutions</h1>
+
+    <div class="solution">
+      <h2 class="solution-title">🔹 Practical 1: Basic List Rendering</h2>
+      <pre><code>function FruitList() {
+  const fruits = ['Apple', 'Banana', 'Mango'];
+  return (
+    &lt;ul&gt;
+      {fruits.map((fruit, index) => (
+        &lt;li key={index}&gt;{fruit}&lt;/li&gt;
+      ))}
+    &lt;/ul&gt;
+  );
+}</code></pre>
+      <div class="explanation">
+        <p><strong>Key Points:</strong></p>
+        <ul>
+          <li>
+            Array <code>map()</code> method used to transform array items to JSX
+            elements
+          </li>
+          <li>
+            Basic list rendering with index as key (for simple static lists)
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="solution">
+      <h2 class="solution-title">🔹 Practical 2: List with Key</h2>
+      <pre><code>function StudentList() {
+  const students = ['Rahul', 'Sana', 'Kabir'];
+  return (
+    &lt;ul&gt;
+      {students.map((name, index) => (
+        &lt;li key={index}&gt;{name}&lt;/li&gt;
+      ))}
+    &lt;/ul&gt;
+  );
+}</code></pre>
+      <div class="explanation">
+        <p><strong>Key Points:</strong></p>
+        <ul>
+          <li>
+            Same pattern as Task 1 but emphasizes the importance of
+            <code>key</code> prop
+          </li>
+          <li>
+            Keys help React identify which items have changed/added/removed
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="solution">
+      <h2 class="solution-title">🔹 Practical 3: List of Objects</h2>
+      <pre><code>function ProductList() {
+  const products = [
+    { id: 1, name: 'Mobile', price: 10000 },
+    { id: 2, name: 'Laptop', price: 50000 }
+  ];
+  return (
+    &lt;ul&gt;
+      {products.map(product => (
+        &lt;li key={product.id}&gt;
+          {product.name} - ₹{product.price}
+        &lt;/li&gt;
+      ))}
+    &lt;/ul&gt;
+  );
+}</code></pre>
+      <div class="explanation">
+        <p><strong>Key Points:</strong></p>
+        <ul>
+          <li>Rendering from an array of objects</li>
+          <li>
+            Using unique <code>id</code> as key (better than index for dynamic
+            lists)
+          </li>
+          <li>Accessing multiple properties in each item</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="solution">
+      <h2 class="solution-title">🔹 Practical 4: Conditional List Rendering</h2>
+      <pre><code>function UserList() {
+  const users = ['Ali', 'Pooja']; // or []
+
+  return (
+    &lt;div&gt;
+      {users.length > 0 ? (
+        &lt;ul&gt;
+          {users.map((user, index) => (
+            &lt;li key={index}&gt;{user}&lt;/li&gt;
+          ))}
+        &lt;/ul&gt;
+      ) : (
+        &lt;p&gt;No users online&lt;/p&gt;
+      )}
+    &lt;/div&gt;
+  );
+}</code></pre>
+      <div class="explanation">
+        <p><strong>Key Points:</strong></p>
+        <ul>
+          <li>Ternary operator for conditional rendering</li>
+          <li>Checking array length to determine what to show</li>
+          <li>Fallback UI when list is empty</li>
+        </ul>
+      </div>
+    </div>
+
+    <h1>🎨 Styling in React – Practical Solutions</h1>
+
+    <div class="solution">
+      <h2 class="solution-title">🔸 Practical 5: Inline Styling</h2>
+      <pre><code>function WelcomeText() {
+  const headingStyle = {
+    color: 'blue',
+    fontSize: '24px'
+  };
+
+  return &lt;h1 style={headingStyle}&gt;Welcome to React&lt;/h1&gt;;
+}</code></pre>
+      <div class="explanation">
+        <p><strong>Key Points:</strong></p>
+        <ul>
+          <li>Style object with camelCase property names</li>
+          <li>Styles applied via <code>style</code> prop</li>
+          <li>Values as strings (including pixel values)</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="solution">
+      <h2 class="solution-title">🔸 Practical 6: CSS Class Styling</h2>
+      <p><strong>App.jsx</strong></p>
+      <pre><code>import './App.css';
+
+function Button() {
+  return &lt;button className="btn-primary"&gt;Click Me&lt;/button&gt;;
+}</code></pre>
+      <p><strong>App.css</strong></p>
+      <pre><code>.btn-primary {
+  background-color: green;
+  color: white;
+  padding: 10px;
+}</code></pre>
+      <div class="explanation">
+        <p><strong>Key Points:</strong></p>
+        <ul>
+          <li>Separate CSS file for styles</li>
+          <li>Using <code>className</code> instead of <code>class</code></li>
+          <li>Regular CSS syntax in .css file</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="solution">
+      <h2 class="solution-title">
+        🔸 Practical 7: Dynamic Styling with useState
+      </h2>
+      <pre><code>import { useState } from 'react';
+
+function ColorChanger() {
+  const [bgColor, setBgColor] = useState('red');
+
+  const changeColor = () => {
+    setBgColor(prev => (prev === 'red' ? 'blue' : 'red'));
+  };
+
+  return (
+    &lt;div style={{ backgroundColor: bgColor, padding: '20px' }}&gt;
+      &lt;button onClick={changeColor}&gt;Change Background&lt;/button&gt;
+    &lt;/div&gt;
+  );
+}</code></pre>
+      <div class="explanation">
+        <p><strong>Key Points:</strong></p>
+        <ul>
+          <li>State variable to track current color</li>
+          <li>Inline styles that change based on state</li>
+          <li>Toggle logic using functional update</li>
+        </ul>
+      </div>
+    </div>
+  </body>
+</html>
