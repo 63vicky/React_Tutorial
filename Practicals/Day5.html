@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>React Forms Practicals – Solutions</title>
+    <script
+      src="https://unpkg.com/react@18/umd/react.development.js"
+      crossorigin
+    ></script>
+    <script
+      src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"
+      crossorigin
+    ></script>
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+    <style>
+      body {
+        font-family: 'Segoe UI', Arial, sans-serif;
+        line-height: 1.6;
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 20px;
+        background-color: #f9f9f9;
+      }
+      h1 {
+        color: #2c3e50;
+        border-bottom: 2px solid #3498db;
+        padding-bottom: 10px;
+      }
+      .practical {
+        background: white;
+        border-radius: 8px;
+        padding: 20px;
+        margin-bottom: 20px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      }
+      .task-description {
+        background: #e8f8f5;
+        padding: 15px;
+        border-radius: 5px;
+        margin-bottom: 15px;
+      }
+      input,
+      select,
+      button {
+        margin: 8px 0;
+        padding: 8px;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+      }
+      button {
+        background-color: #3498db;
+        color: white;
+        cursor: pointer;
+        border: none;
+        padding: 10px 15px;
+      }
+      button:hover {
+        background-color: #2980b9;
+      }
+      hr {
+        border: 0;
+        height: 1px;
+        background: #ddd;
+        margin: 20px 0;
+      }
+      .solution {
+        margin-top: 15px;
+        padding: 15px;
+        background: #f5f5f5;
+        border-radius: 5px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="root"></div>
+
+    <script type="text/babel">
+      function App() {
+        return (
+          <div>
+            <h1>React Forms Practicals – Solutions</h1>
+            <Practical1 />
+            <Practical2 />
+            <Practical3 />
+            <Practical4 />
+            <Practical5 />
+          </div>
+        );
+      }
+
+      function Practical1() {
+        const [name, setName] = React.useState('');
+
+        return (
+          <div className="practical">
+            <h2>Practical 1: Controlled Text Input</h2>
+            <div className="task-description">
+              <p>
+                <strong>Task:</strong> Create a text input where users can enter
+                their name. Show the entered name below.
+              </p>
+              <p>
+                <strong>Hindi:</strong> एक text input बनाइए जिसमें user नाम लिख
+                सके। नीचे entered नाम show होना चाहिए।
+              </p>
+            </div>
+
+            <input
+              type="text"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              placeholder="Enter your name"
+            />
+            <div className="solution">
+              <p>
+                Your name is: <strong>{name || 'Not entered'}</strong>
+              </p>
+            </div>
+          </div>
+        );
+      }
+
+      function Practical2() {
+        const [formData, setFormData] = React.useState({ name: '', email: '' });
+
+        const handleSubmit = (e) => {
+          e.preventDefault();
+          alert(
+            `Form submitted!\nName: ${formData.name}\nEmail: ${formData.email}`
+          );
+        };
+
+        return (
+          <div className="practical">
+            <h2>Practical 2: Form Submission</h2>
+            <div className="task-description">
+              <p>
+                <strong>Task:</strong> Create a form with name and email inputs
+                that shows an alert on submit.
+              </p>
+              <p>
+                <strong>Hindi:</strong> एक form बनाइए जिसमें नाम और ईमेल input
+                हों। Submit करने पर alert आए।
+              </p>
+            </div>
+
+            <form onSubmit={handleSubmit}>
+              <div>
+                <input
+                  type="text"
+                  placeholder="Name"
+                  value={formData.name}
+                  onChange={(e) =>
+                    setFormData({ ...formData, name: e.target.value })
+                  }
+                  required
+                />
+              </div>
+              <div>
+                <input
+                  type="email"
+                  placeholder="Email"
+                  value={formData.email}
+                  onChange={(e) =>
+                    setFormData({ ...formData, email: e.target.value })
+                  }
+                  required
+                />
+              </div>
+              <button type="submit">Submit Form</button>
+            </form>
+          </div>
+        );
+      }
+
+      function Practical3() {
+        const [formData, setFormData] = React.useState({
+          username: '',
+          password: '',
+        });
+
+        const handleChange = (e) => {
+          const { name, value } = e.target;
+          setFormData((prev) => ({ ...prev, [name]: value }));
+        };
+
+        const handleSubmit = (e) => {
+          e.preventDefault();
+          alert(
+            `Login attempt:\nUsername: ${formData.username}\nPassword: ${formData.password}`
+          );
+        };
+
+        return (
+          <div className="practical">
+            <h2>Practical 3: Multiple Inputs with Single Handler</h2>
+            <div className="task-description">
+              <p>
+                <strong>Task:</strong> Create username and password fields
+                managed by a single onChange handler.
+              </p>
+              <p>
+                <strong>Hindi:</strong> Username और Password input fields बनाइए
+                और दोनों को एक ही onChange handler से manage कीजिए।
+              </p>
+            </div>
+
+            <form onSubmit={handleSubmit}>
+              <div>
+                <input
+                  name="username"
+                  type="text"
+                  placeholder="Username"
+                  value={formData.username}
+                  onChange={handleChange}
+                  required
+                />
+              </div>
+              <div>
+                <input
+                  name="password"
+                  type="password"
+                  placeholder="Password"
+                  value={formData.password}
+                  onChange={handleChange}
+                  required
+                />
+              </div>
+              <button type="submit">Login</button>
+            </form>
+
+            <div className="solution">
+              <p>Current values:</p>
+              <ul>
+                <li>Username: {formData.username || 'Not entered'}</li>
+                <li>
+                  Password: {formData.password ? '••••••' : 'Not entered'}
+                </li>
+              </ul>
+            </div>
+          </div>
+        );
+      }
+
+      function Practical4() {
+        const [language, setLanguage] = React.useState('Python');
+
+        return (
+          <div className="practical">
+            <h2>Practical 4: Dropdown Selector</h2>
+            <div className="task-description">
+              <p>
+                <strong>Task:</strong> Create a language selector dropdown that
+                shows the selected language.
+              </p>
+              <p>
+                <strong>Hindi:</strong> एक language selector dropdown बनाइए और
+                selected language नीचे show कीजिए।
+              </p>
+            </div>
+
+            <select
+              value={language}
+              onChange={(e) => setLanguage(e.target.value)}
+            >
+              <option value="JavaScript">JavaScript</option>
+              <option value="Python">Python</option>
+              <option value="C++">C++</option>
+              <option value="Java">Java</option>
+            </select>
+
+            <div className="solution">
+              <p>
+                You selected: <strong>{language}</strong>
+              </p>
+            </div>
+          </div>
+        );
+      }
+
+      function Practical5() {
+        const [agreed, setAgreed] = React.useState(false);
+
+        return (
+          <div className="practical">
+            <h2>Practical 5: Checkbox Input</h2>
+            <div className="task-description">
+              <p>
+                <strong>Task:</strong> Create a checkbox that shows "Agreed"
+                when checked.
+              </p>
+              <p>
+                <strong>Hindi:</strong> एक checkbox बनाइए जिसमें लिखा हो "I
+                agree", और check करने पर "Agreed" नीचे दिखे।
+              </p>
+            </div>
+
+            <label>
+              <input
+                type="checkbox"
+                checked={agreed}
+                onChange={(e) => setAgreed(e.target.checked)}
+              />
+              I agree to the terms and conditions
+            </label>
+
+            <div className="solution">
+              <p>
+                Status: <strong>{agreed ? 'Agreed ✓' : 'Not agreed ✗'}</strong>
+              </p>
+            </div>
+          </div>
+        );
+      }
+
+      const root = ReactDOM.createRoot(document.getElementById('root'));
+      root.render(<App />);
+    </script>
+  </body>
+</html>

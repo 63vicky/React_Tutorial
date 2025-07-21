@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>React Forms Practicals - Solutions</title>
+    <style>
+      body {
+        font-family: 'Segoe UI', Arial, sans-serif;
+        line-height: 1.6;
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 20px;
+        background-color: #f9f9f9;
+      }
+
+      h1 {
+        color: #2c3e50;
+        border-bottom: 2px solid #3498db;
+        padding-bottom: 10px;
+      }
+
+      .solution {
+        background: white;
+        border-radius: 8px;
+        padding: 20px;
+        margin-bottom: 30px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      }
+
+      h2 {
+        color: #2980b9;
+        margin-top: 0;
+      }
+
+      pre {
+        background: #2d2d2d;
+        color: #f8f8f2;
+        padding: 15px;
+        border-radius: 5px;
+        overflow-x: auto;
+        tab-size: 2;
+      }
+
+      .explanation {
+        background: #f5f5f5;
+        padding: 15px;
+        border-radius: 5px;
+        margin-top: 15px;
+      }
+
+      .task-desc {
+        background: #e8f8f5;
+        padding: 15px;
+        border-radius: 5px;
+        margin-bottom: 15px;
+      }
+
+      .hindi {
+        font-style: italic;
+        color: #555;
+      }
+    </style>
+  </head>
+
+  <body>
+    <h1>React Forms Practicals - Complete Solutions</h1>
+
+    <div class="solution">
+      <h2>Practical 1: Controlled Text Input</h2>
+      <div class="task-desc">
+        <p>
+          <strong>Task:</strong> Create a text input where users can enter their
+          name.
+        </p>
+        <p class="hindi">एक text input बनाइए जिसमें user नाम लिख सके।</p>
+      </div>
+
+      <pre><code>function NameInput() {
+        const [name, setName] = React.useState('');
+
+        return (
+            &lt;div&gt;
+            &lt;input
+                type="text"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                placeholder="Enter your name"
+            /&gt;
+            &lt;p&gt;Your name is: {name}&lt;/p&gt;
+            &lt;/div&gt;
+        );
+        }</code></pre>
+
+      <div class="explanation">
+        <p><strong>Key Points:</strong></p>
+        <ul>
+          <li>Uses <code>useState</code> to manage the input value</li>
+          <li>
+            The input is <strong>controlled</strong> - its value comes from
+            React state
+          </li>
+          <li><code>onChange</code> updates the state with each keystroke</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="solution">
+      <h2>Practical 2: Form Submission</h2>
+      <div class="task-desc">
+        <p>
+          <strong>Task:</strong> Create a form with name and email inputs that
+          shows an alert on submit.
+        </p>
+        <p class="hindi">
+          नाम और ईमेल input वाला form बनाइए जो submit पर alert दिखाए।
+        </p>
+      </div>
+
+      <pre><code>function SignupForm() {
+  const [formData, setFormData] = React.useState({
+    name: '',
+    email: ''
+  });
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    alert(`Submitted: ${formData.name}, ${formData.email}`);
+  };
+
+  return (
+    &lt;form onSubmit={handleSubmit}&gt;
+      &lt;input
+        type="text"
+        placeholder="Name"
+        value={formData.name}
+        onChange={(e) =&gt; 
+          setFormData({...formData, name: e.target.value})
+        }
+      /&gt;
+      &lt;input
+        type="email"
+        placeholder="Email"
+        value={formData.email}
+        onChange={(e) =&gt; 
+          setFormData({...formData, email: e.target.value})
+        }
+      /&gt;
+      &lt;button type="submit"&gt;Submit&lt;/button&gt;
+    &lt;/form&gt;
+  );
+}</code></pre>
+
+      <div class="explanation">
+        <p><strong>Key Points:</strong></p>
+        <ul>
+          <li>Form data stored in a single state object</li>
+          <li><code>preventDefault()</code> stops page reload on submit</li>
+          <li>Each input has its own <code>onChange</code> handler</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="solution">
+      <h2>Practical 3: Multiple Inputs with Single Handler</h2>
+      <div class="task-desc">
+        <p>
+          <strong>Task:</strong> Create username/password fields with one
+          onChange handler.
+        </p>
+        <p class="hindi">
+          Username और Password fields को एक ही onChange handler से manage करें।
+        </p>
+      </div>
+
+      <pre><code>function LoginForm() {
+  const [formData, setFormData] = React.useState({
+    username: '',
+    password: ''
+  });
+
+  const handleChange = (e) => {
+    const {name, value} = e.target;
+    setFormData(prev => ({...prev, [name]: value}));
+  };
+
+  return (
+    &lt;form&gt;
+      &lt;input
+        name="username"
+        type="text"
+        value={formData.username}
+        onChange={handleChange}
+      /&gt;
+      &lt;input
+        name="password"
+        type="password"
+        value={formData.password}
+        onChange={handleChange}
+      /&gt;
+    &lt;/form&gt;
+  );
+}</code></pre>
+
+      <div class="explanation">
+        <p><strong>Key Points:</strong></p>
+        <ul>
+          <li>Uses <code>name</code> attributes to identify inputs</li>
+          <li>
+            Single handler updates the correct field using computed property
+            names
+          </li>
+          <li>Functional update ensures latest state</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="solution">
+      <h2>Practical 4: Dropdown Selector</h2>
+      <div class="task-desc">
+        <p><strong>Task:</strong> Create a language selector dropdown.</p>
+        <p class="hindi">
+          Language selector dropdown बनाइए जो selected language दिखाए।
+        </p>
+      </div>
+
+      <pre><code>function LanguageSelector() {
+  const [language, setLanguage] = React.useState('JavaScript');
+
+  return (
+    &lt;div&gt;
+      &lt;select 
+        value={language}
+        onChange={(e) => setLanguage(e.target.value)}
+      &gt;
+        &lt;option value="JavaScript"&gt;JavaScript&lt;/option&gt;
+        &lt;option value="Python"&gt;Python&lt;/option&gt;
+        &lt;option value="Java"&gt;Java&lt;/option&gt;
+      &lt;/select&gt;
+      &lt;p&gt;Selected: {language}&lt;/p&gt;
+    &lt;/div&gt;
+  );
+}</code></pre>
+
+      <div class="explanation">
+        <p><strong>Key Points:</strong></p>
+        <ul>
+          <li>Dropdown is controlled via <code>value</code> prop</li>
+          <li>Initial value set in useState</li>
+          <li>
+            Works just like text inputs but with <code>&lt;select&gt;</code>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="solution">
+      <h2>Practical 5: Checkbox Input</h2>
+      <div class="task-desc">
+        <p>
+          <strong>Task:</strong> Create a checkbox that shows status when
+          toggled.
+        </p>
+        <p class="hindi">Checkbox बनाइए जो status दिखाए जब toggle किया जाए।</p>
+      </div>
+
+      <pre><code>function AgreementCheckbox() {
+  const [agreed, setAgreed] = React.useState(false);
+
+  return (
+    &lt;div&gt;
+      &lt;label&gt;
+        &lt;input
+          type="checkbox"
+          checked={agreed}
+          onChange={(e) => setAgreed(e.target.checked)}
+        /&gt;
+        I agree to terms
+      &lt;/label&gt;
+      &lt;p&gt;Status: {agreed ? 'Agreed' : 'Not agreed'}&lt;/p&gt;
+    &lt;/div&gt;
+  );
+}</code></pre>
+
+      <div class="explanation">
+        <p><strong>Key Points:</strong></p>
+        <ul>
+          <li>Uses <code>checked</code> prop instead of <code>value</code></li>
+          <li><code>e.target.checked</code> gives the checkbox state</li>
+          <li>Conditional rendering shows different text based on state</li>
+        </ul>
+      </div>
+    </div>
+  </body>
+</html>
