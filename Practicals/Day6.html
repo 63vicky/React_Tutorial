@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>React Router Practicals for Students</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        line-height: 1.6;
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 20px;
+      }
+      h1,
+      h2 {
+        color: #2c3e50;
+      }
+      code {
+        background-color: #f4f4f4;
+        padding: 2px 5px;
+        border-radius: 3px;
+        font-family: monospace;
+      }
+      .solution-link {
+        display: inline-block;
+        background-color: #e7f5fe;
+        color: #2196f3;
+        padding: 8px 15px;
+        border-radius: 4px;
+        text-decoration: none;
+        margin-top: 10px;
+        font-weight: bold;
+        border: 1px solid #2196f3;
+      }
+      .solution-link:hover {
+        background-color: #d0e9ff;
+      }
+      .note {
+        background-color: #f8f9fa;
+        padding: 10px;
+        border-left: 4px solid #6c757d;
+        margin: 10px 0;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>React Router Practicals for Students</h1>
+
+    <div class="note">
+      <strong>Note:</strong> All solutions are provided in separate files. Click
+      the "View Solution" links to see each implementation.
+    </div>
+
+    <h2>Practical 1: Basic Routing Setup</h2>
+    <p><strong>Task:</strong></p>
+    <ul>
+      <li>
+        Create three components: <code>Home</code>, <code>About</code>, and
+        <code>Contact</code>.
+      </li>
+      <li>Set up routing using <code>react-router-dom</code>.</li>
+      <li>
+        Show navigation links to switch between these pages without refreshing
+        the page.
+      </li>
+    </ul>
+
+    <p><strong>Expected Output:</strong></p>
+    <ul>
+      <li>
+        When you click on "About", the About component content should render.
+      </li>
+      <li>When you click on "Contact", the Contact component should render.</li>
+    </ul>
+
+    <a href="Answers/Day6.html" class="solution-link">View Solution</a>
+
+    <h2>Practical 2: 404 Page</h2>
+    <p><strong>Task:</strong></p>
+    <ul>
+      <li>
+        Add a route that catches all undefined routes and displays a "Page Not
+        Found" message.
+      </li>
+    </ul>
+
+    <p><strong>Expected Output:</strong></p>
+    <ul>
+      <li>
+        Visiting <code>/randompage</code> should show a custom 404 error
+        component.
+      </li>
+    </ul>
+
+    <a href="Answers/Day6.html" class="solution-link">View Solution</a>
+
+    <h2>Practical 3: Nested Routes</h2>
+    <p><strong>Task:</strong></p>
+    <ul>
+      <li>
+        Create a <code>Dashboard</code> component and inside it render
+        <code>Profile</code> and <code>Settings</code> as nested routes.
+      </li>
+      <li>Use <code>&lt;Outlet /&gt;</code> for nested rendering.</li>
+    </ul>
+
+    <p><strong>Expected Output:</strong></p>
+    <ul>
+      <li>Visiting <code>/dashboard/profile</code> shows Profile component.</li>
+      <li>
+        Visiting <code>/dashboard/settings</code> shows Settings component.
+      </li>
+    </ul>
+
+    <a href="Answers/Day6.html" class="solution-link">View Solution</a>
+
+    <h2>Practical 4: Navigation Using <code>Link</code></h2>
+    <p><strong>Task:</strong></p>
+    <ul>
+      <li>
+        Replace anchor tags with <code>&lt;Link&gt;</code> from
+        <code>react-router-dom</code> to navigate between pages.
+      </li>
+    </ul>
+
+    <p><strong>Expected Output:</strong></p>
+    <ul>
+      <li>No full page reload when moving between pages.</li>
+    </ul>
+
+    <a href="Answers/Day6.html" class="solution-link">View Solution</a>
+
+    <h2>Practical 5: Create Navbar Component</h2>
+    <p><strong>Task:</strong></p>
+    <ul>
+      <li>
+        Create a <code>Navbar</code> component that includes navigation to all
+        pages.
+      </li>
+      <li>Import <code>Navbar</code> in <code>App.js</code>.</li>
+    </ul>
+
+    <p><strong>Expected Output:</strong></p>
+    <ul>
+      <li>Navbar appears on all pages.</li>
+      <li>Navigation works correctly using <code>Link</code>.</li>
+    </ul>
+
+    <a href="Answers/Day6.html" class="solution-link">View Solution</a>
+
+    <div class="note">
+      <p><strong>Setup Instructions:</strong></p>
+      <ol>
+        <li>Create a React project using <code>create-react-app</code></li>
+        <li>
+          Install react-router-dom: <code>npm install react-router-dom</code>
+        </li>
+        <li>
+          Create a <code>solutions</code> folder in your project directory
+        </li>
+        <li>
+          Save each solution file as practical1.html, practical2.html, etc. in
+          the solutions folder
+        </li>
+      </ol>
+    </div>
+  </body>
+</html>

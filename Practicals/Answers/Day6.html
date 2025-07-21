@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>React Router Practicals with Solutions</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        line-height: 1.6;
+        max-width: 900px;
+        margin: 0 auto;
+        padding: 20px;
+        color: #333;
+      }
+      h1,
+      h2 {
+        color: #2c3e50;
+      }
+      h2 {
+        margin-top: 30px;
+        padding-bottom: 5px;
+        border-bottom: 1px solid #eee;
+      }
+      code {
+        background-color: #f5f5f5;
+        padding: 2px 5px;
+        border-radius: 3px;
+        font-family: 'Courier New', monospace;
+        font-size: 0.9em;
+      }
+      pre {
+        background-color: #f8f9fa;
+        padding: 15px;
+        border-radius: 5px;
+        overflow-x: auto;
+        border-left: 4px solid #6c757d;
+      }
+      .solution {
+        background-color: #e8f4f8;
+        padding: 15px;
+        border-radius: 5px;
+        margin: 15px 0;
+        border-left: 4px solid #17a2b8;
+      }
+      .toggle-btn {
+        background-color: #6c757d;
+        color: white;
+        border: none;
+        padding: 8px 15px;
+        border-radius: 4px;
+        cursor: pointer;
+        margin: 10px 0;
+        font-size: 0.9em;
+      }
+      .toggle-btn:hover {
+        background-color: #5a6268;
+      }
+      .collapsible {
+        display: none;
+      }
+      .visible {
+        display: block;
+      }
+      .note {
+        background-color: #fff3cd;
+        padding: 10px;
+        border-left: 4px solid #ffc107;
+        margin: 10px 0;
+      }
+      .file-structure {
+        background-color: #e2e3e5;
+        padding: 10px;
+        border-radius: 5px;
+        font-family: monospace;
+        margin: 10px 0;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>React Router Practicals with Solutions</h1>
+
+    <div class="note">
+      <strong>Before starting:</strong> Make sure to install
+      react-router-dom:<br />
+      <code>npm install react-router-dom</code>
+    </div>
+
+    <h2>Practical 1: Basic Routing Setup</h2>
+    <p><strong>Task:</strong></p>
+    <ul>
+      <li>
+        Create three components: <code>Home</code>, <code>About</code>, and
+        <code>Contact</code>
+      </li>
+      <li>Set up routing using <code>react-router-dom</code></li>
+      <li>Show navigation links to switch between pages without refreshing</li>
+    </ul>
+    <p><strong>Expected Output:</strong></p>
+    <ul>
+      <li>Clicking "About" shows About component</li>
+      <li>Clicking "Contact" shows Contact component</li>
+    </ul>
+
+    <button class="toggle-btn" onclick="toggleSolution('sol1')">
+      Show/Hide Solution
+    </button>
+
+    <div id="sol1" class="collapsible">
+      <div class="solution">
+        <h3>Solution:</h3>
+        <div class="file-structure">
+          src/<br />
+          ├── App.js<br />
+          ├── components/<br />
+          │ ├── Home.js<br />
+          │ ├── About.js<br />
+          │ └── Contact.js
+        </div>
+
+        <h4>App.js</h4>
+        <pre><code>import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
+import Home from './components/Home';
+import About from './components/About';
+import Contact from './components/Contact';
+
+function App() {
+  return (
+    &lt;Router&gt;
+      &lt;nav&gt;
+        &lt;Link to="/"&gt;Home&lt;/Link&gt; | 
+        &lt;Link to="/about"&gt;About&lt;/Link&gt; | 
+        &lt;Link to="/contact"&gt;Contact&lt;/Link&gt;
+      &lt;/nav&gt;
+      
+      &lt;Routes&gt;
+        &lt;Route path="/" element={&lt;Home /&gt;} /&gt;
+        &lt;Route path="/about" element={&lt;About /&gt;} /&gt;
+        &lt;Route path="/contact" element={&lt;Contact /&gt;} /&gt;
+      &lt;/Routes&gt;
+    &lt;/Router&gt;
+  );
+}
+
+export default App;</code></pre>
+
+        <h4>components/Home.js</h4>
+        <pre><code>function Home() {
+  return &lt;h2&gt;Welcome to our Home Page!&lt;/h2&gt;;
+}
+export default Home;</code></pre>
+
+        <h4>components/About.js</h4>
+        <pre><code>function About() {
+  return &lt;h2&gt;About Our Company&lt;/h2&gt;;
+}
+export default About;</code></pre>
+
+        <h4>components/Contact.js</h4>
+        <pre><code>function Contact() {
+  return &lt;h2&gt;Contact Us Page&lt;/h2&gt;;
+}
+export default Contact;</code></pre>
+      </div>
+    </div>
+
+    <h2>Practical 2: 404 Page</h2>
+    <p><strong>Task:</strong></p>
+    <ul>
+      <li>Add a route that catches all undefined routes</li>
+      <li>Display a custom "Page Not Found" message</li>
+    </ul>
+    <p><strong>Expected Output:</strong></p>
+    <ul>
+      <li>Visiting <code>/randompage</code> shows 404 component</li>
+    </ul>
+
+    <button class="toggle-btn" onclick="toggleSolution('sol2')">
+      Show/Hide Solution
+    </button>
+
+    <div id="sol2" class="collapsible">
+      <div class="solution">
+        <h3>Solution:</h3>
+        <div class="file-structure">
+          src/<br />
+          ├── App.js (updated)<br />
+          └── components/<br />
+          └── NotFound.js
+        </div>
+
+        <h4>App.js (updated)</h4>
+        <pre><code>import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+// ... other imports ...
+import NotFound from './components/NotFound';
+
+function App() {
+  return (
+    &lt;Router&gt;
+      {/* ... existing nav and routes ... */}
+      &lt;Routes&gt;
+        &lt;Route path="/" element={&lt;Home /&gt;} /&gt;
+        &lt;Route path="/about" element={&lt;About /&gt;} /&gt;
+        &lt;Route path="/contact" element={&lt;Contact /&gt;} /&gt;
+        &lt;Route path="*" element={&lt;NotFound /&gt;} /&gt;
+      &lt;/Routes&gt;
+    &lt;/Router&gt;
+  );
+}</code></pre>
+
+        <h4>components/NotFound.js</h4>
+        <pre><code>function NotFound() {
+  return (
+    &lt;div&gt;
+      &lt;h2&gt;404 - Page Not Found&lt;/h2&gt;
+      &lt;p&gt;The page you're looking for doesn't exist.&lt;/p&gt;
+    &lt;/div&gt;
+  );
+}
+export default NotFound;</code></pre>
+      </div>
+    </div>
+
+    <h2>Practical 3: Nested Routes</h2>
+    <p><strong>Task:</strong></p>
+    <ul>
+      <li>
+        Create a <code>Dashboard</code> component with nested
+        <code>Profile</code> and <code>Settings</code> routes
+      </li>
+      <li>Use <code>&lt;Outlet /&gt;</code> for nested rendering</li>
+    </ul>
+    <p><strong>Expected Output:</strong></p>
+    <ul>
+      <li><code>/dashboard/profile</code> shows Profile</li>
+      <li><code>/dashboard/settings</code> shows Settings</li>
+    </ul>
+
+    <button class="toggle-btn" onclick="toggleSolution('sol3')">
+      Show/Hide Solution
+    </button>
+
+    <div id="sol3" class="collapsible">
+      <div class="solution">
+        <h3>Solution:</h3>
+        <div class="file-structure">
+          src/<br />
+          ├── App.js (updated)<br />
+          └── components/<br />
+          ├── Dashboard.js<br />
+          ├── Profile.js<br />
+          └── Settings.js
+        </div>
+
+        <h4>App.js (updated)</h4>
+        <pre><code>import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+// ... other imports ...
+import Dashboard from './components/Dashboard';
+
+function App() {
+  return (
+    &lt;Router&gt;
+      {/* ... existing nav ... */}
+      &lt;Routes&gt;
+        {/* ... existing routes ... */}
+        &lt;Route path="dashboard" element={&lt;Dashboard /&gt;}&gt;
+          &lt;Route path="profile" element={&lt;Profile /&gt;} /&gt;
+          &lt;Route path="settings" element={&lt;Settings /&gt;} /&gt;
+        &lt;/Route&gt;
+      &lt;/Routes&gt;
+    &lt;/Router&gt;
+  );
+}</code></pre>
+
+        <h4>components/Dashboard.js</h4>
+        <pre><code>import { Outlet, Link } from 'react-router-dom';
+
+function Dashboard() {
+  return (
+    &lt;div&gt;
+      &lt;h2&gt;Dashboard&lt;/h2&gt;
+      &lt;nav&gt;
+        &lt;Link to="profile"&gt;Profile&lt;/Link&gt; | 
+        &lt;Link to="settings"&gt;Settings&lt;/Link&gt;
+      &lt;/nav&gt;
+      
+      &lt;Outlet /&gt;
+    &lt;/div&gt;
+  );
+}
+export default Dashboard;</code></pre>
+
+        <h4>components/Profile.js</h4>
+        <pre><code>function Profile() {
+  return &lt;h3&gt;User Profile&lt;/h3&gt;;
+}
+export default Profile;</code></pre>
+
+        <h4>components/Settings.js</h4>
+        <pre><code>function Settings() {
+  return &lt;h3&gt;Account Settings&lt;/h3&gt;;
+}
+export default Settings;</code></pre>
+      </div>
+    </div>
+
+    <h2>Practical 4: Navigation Using Link</h2>
+    <p><strong>Task:</strong></p>
+    <ul>
+      <li>
+        Replace anchor tags (<code>&lt;a&gt;</code>) with
+        <code>&lt;Link&gt;</code> components
+      </li>
+    </ul>
+    <p><strong>Expected Output:</strong></p>
+    <ul>
+      <li>No page reload when navigating between pages</li>
+    </ul>
+
+    <button class="toggle-btn" onclick="toggleSolution('sol4')">
+      Show/Hide Solution
+    </button>
+
+    <div id="sol4" class="collapsible">
+      <div class="solution">
+        <h3>Solution:</h3>
+        <p>Replace all anchor tags like this:</p>
+        <pre><code>// Bad - causes full page reload
+&lt;a href="/about"&gt;About&lt;/a&gt;
+
+// Good - uses client-side routing
+&lt;Link to="/about"&gt;About&lt;/Link&gt;</code></pre>
+
+        <p>Example from App.js navigation:</p>
+        <pre><code>import { Link } from 'react-router-dom';
+
+// In your component:
+&lt;nav&gt;
+  &lt;Link to="/"&gt;Home&lt;/Link&gt; | 
+  &lt;Link to="/about"&gt;About&lt;/Link&gt; | 
+  &lt;Link to="/contact"&gt;Contact&lt;/Link&gt;
+&lt;/nav&gt;</code></pre>
+      </div>
+    </div>
+
+    <h2>Practical 5: Create Navbar Component</h2>
+    <p><strong>Task:</strong></p>
+    <ul>
+      <li>Create a reusable <code>Navbar</code> component</li>
+      <li>Include it in <code>App.js</code> to appear on all pages</li>
+    </ul>
+    <p><strong>Expected Output:</strong></p>
+    <ul>
+      <li>Consistent navigation across all pages</li>
+    </ul>
+
+    <button class="toggle-btn" onclick="toggleSolution('sol5')">
+      Show/Hide Solution
+    </button>
+
+    <div id="sol5" class="collapsible">
+      <div class="solution">
+        <h3>Solution:</h3>
+        <div class="file-structure">
+          src/<br />
+          ├── App.js (updated)<br />
+          └── components/<br />
+          └── Navbar.js
+        </div>
+
+        <h4>components/Navbar.js</h4>
+        <pre><code>import { Link } from 'react-router-dom';
+
+function Navbar() {
+  return (
+    &lt;nav style={{ padding: '10px', background: '#f0f0f0' }}&gt;
+      &lt;Link to="/" style={{ marginRight: '10px' }}&gt;Home&lt;/Link&gt;
+      &lt;Link to="/about" style={{ marginRight: '10px' }}&gt;About&lt;/Link&gt;
+      &lt;Link to="/contact" style={{ marginRight: '10px' }}&gt;Contact&lt;/Link&gt;
+      &lt;Link to="/dashboard"&gt;Dashboard&lt;/Link&gt;
+    &lt;/nav&gt;
+  );
+}
+export default Navbar;</code></pre>
+
+        <h4>App.js (updated)</h4>
+        <pre><code>import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import Navbar from './components/Navbar';
+// ... other imports ...
+
+function App() {
+  return (
+    &lt;Router&gt;
+      &lt;Navbar /&gt;
+      &lt;Routes&gt;
+        {/* ... all your routes ... */}
+      &lt;/Routes&gt;
+    &lt;/Router&gt;
+  );
+}</code></pre>
+      </div>
+    </div>
+
+    <script>
+      function toggleSolution(id) {
+        const element = document.getElementById(id);
+        element.classList.toggle('visible');
+      }
+
+      // Optional: Add keyboard navigation
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'ArrowDown' || e.key === 'ArrowUp') {
+          e.preventDefault();
+          const buttons = document.querySelectorAll('.toggle-btn');
+          const currentIndex = Array.from(buttons).indexOf(
+            document.activeElement
+          );
+
+          if (e.key === 'ArrowDown' && currentIndex < buttons.length - 1) {
+            buttons[currentIndex + 1].focus();
+          } else if (e.key === 'ArrowUp' && currentIndex > 0) {
+            buttons[currentIndex - 1].focus();
+          }
+        }
+      });
+    </script>
+  </body>
+</html>

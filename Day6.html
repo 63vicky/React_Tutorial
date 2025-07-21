@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="hi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>React Router Training - Instructor Guide</title>
+    <style>
+      body {
+        font-family: 'Segoe UI', 'Noto Sans Devanagari', Arial, sans-serif;
+        line-height: 1.6;
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 20px;
+        color: #333;
+        background-color: #f9f9f9;
+      }
+      h1 {
+        color: #2c3e50;
+        border-bottom: 2px solid #3498db;
+        padding-bottom: 10px;
+      }
+      .time-section {
+        background: white;
+        border-radius: 8px;
+        padding: 20px;
+        margin-bottom: 20px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      }
+      .time-marker {
+        font-weight: bold;
+        color: #e74c3c;
+        display: flex;
+        align-items: center;
+      }
+      .time-icon {
+        margin-right: 10px;
+        font-size: 1.2em;
+      }
+      code {
+        /* background: #f4f4f4; */
+        padding: 2px 5px;
+        border-radius: 3px;
+        font-family: Consolas, monospace;
+      }
+      pre {
+        background: #2d2d2d;
+        color: #f8f8f2;
+        padding: 15px;
+        border-radius: 5px;
+        overflow-x: auto;
+        tab-size: 2;
+      }
+      .demo {
+        background: #eaf7fd;
+        padding: 15px;
+        border-radius: 5px;
+        margin-top: 15px;
+      }
+      .homework {
+        background: #e8f8f5;
+        padding: 15px;
+        border-radius: 5px;
+      }
+      .concept {
+        border-left: 4px solid #f39c12;
+        padding-left: 15px;
+        margin: 15px 0;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>React Router – Trainer Script (1 Hour Class)</h1>
+    <p>
+      <strong>उद्देश्य:</strong> Students को React में routing का practical
+      अनुभव देना।
+    </p>
+
+    <div class="time-section">
+      <h2 class="time-marker">
+        <span class="time-icon">⏱</span> 0:00 – 5:00 मिनट
+      </h2>
+      <h3>Introduction & Conceptual Overview</h3>
+      <div class="concept">
+        <p>
+          React Router एक library है जो React में page reload के बिना navigation
+          की सुविधा देता है। ये SPA के लिए जरूरी है।
+        </p>
+        <p><strong>Key Points:</strong></p>
+        <ul>
+          <li>Client-side routing</li>
+          <li>No page reloads</li>
+          <li>Maintains application state</li>
+          <li>Better user experience</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="time-section">
+      <h2 class="time-marker">
+        <span class="time-icon">⏱</span> 5:00 – 10:00 मिनट
+      </h2>
+      <h3>React Router Installation</h3>
+      <p>Terminal में command:</p>
+      <pre><code>npm install react-router-dom</code></pre>
+      <div class="demo">
+        <p>
+          <strong>Demo:</strong> VS Code में terminal खोलकर install करके दिखाएं
+        </p>
+      </div>
+    </div>
+
+    <div class="time-section">
+      <h2 class="time-marker">
+        <span class="time-icon">⏱</span> 10:00 – 15:00 मिनट
+      </h2>
+      <h3>BrowserRouter, Routes, Route</h3>
+      <p>Import करना:</p>
+      <pre><code>import { BrowserRouter, Routes, Route } from 'react-router-dom';</code></pre>
+      <div class="concept">
+        <p><strong>Components Explanation:</strong></p>
+        <ul>
+          <li><code>BrowserRouter</code>: Main wrapper component</li>
+          <li><code>Routes</code>: Contains all route definitions</li>
+          <li><code>Route</code>: Individual route mapping</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="time-section">
+      <h2 class="time-marker">
+        <span class="time-icon">⏱</span> 15:00 – 25:00 मिनट
+      </h2>
+      <h3>Basic Routing Code Example</h3>
+      <pre><code>function App() {
+  return (
+    &lt;BrowserRouter&gt;
+      &lt;Routes&gt;
+        &lt;Route path="/" element={&lt;Home /&gt;} /&gt;
+        &lt;Route path="/about" element={&lt;About /&gt;} /&gt;
+      &lt;/Routes&gt;
+    &lt;/BrowserRouter&gt;
+  );
+}</code></pre>
+      <div class="demo">
+        <p>
+          <strong>Live Coding:</strong> Basic Home and About components बनाकर
+          दिखाएं
+        </p>
+      </div>
+    </div>
+
+    <div class="time-section">
+      <h2 class="time-marker">
+        <span class="time-icon">⏱</span> 25:00 – 30:00 मिनट
+      </h2>
+      <h3>Live Code Demo</h3>
+      <p>Code run करके students को दिखाएं कि:</p>
+      <ul>
+        <li>URL change हो रहा है</li>
+        <li>Page reload नहीं हो रहा है</li>
+        <li>Components switch हो रहे हैं</li>
+      </ul>
+    </div>
+
+    <div class="time-section">
+      <h2 class="time-marker">
+        <span class="time-icon">⏱</span> 30:00 – 35:00 मिनट
+      </h2>
+      <h3>Link Component</h3>
+      <pre><code>import { Link } from 'react-router-dom';
+
+function Navbar() {
+  return (
+    &lt;nav&gt;
+      &lt;Link to="/"&gt;Home&lt;/Link&gt; | 
+      &lt;Link to="/about"&gt;About&lt;/Link&gt;
+    &lt;/nav&gt;
+  );
+}</code></pre>
+      <div class="concept">
+        <p><strong>Why Link not &lt;a&gt;?</strong></p>
+        <p>Regular anchor tags cause page reload. Link components don't.</p>
+      </div>
+    </div>
+
+    <div class="time-section">
+      <h2 class="time-marker">
+        <span class="time-icon">⏱</span> 35:00 – 40:00 मिनट
+      </h2>
+      <h3>404 Page Setup</h3>
+      <pre><code>&lt;Route path="*" element={&lt;NotFound /&gt;} /&gt;</code></pre>
+      <div class="demo">
+        <p><strong>Demo:</strong> Invalid URL डालकर 404 page दिखाएं</p>
+      </div>
+    </div>
+
+    <div class="time-section">
+      <h2 class="time-marker">
+        <span class="time-icon">⏱</span> 40:00 – 45:00 मिनट
+      </h2>
+      <h3>Nested Routing Concept</h3>
+      <pre><code>&lt;Route path="/dashboard" element={&lt;Dashboard /&gt;}&gt;
+  &lt;Route path="profile" element={&lt;Profile /&gt;} /&gt;
+  &lt;Route path="settings" element={&lt;Settings /&gt;} /&gt;
+&lt;/Route&gt;</code></pre>
+      <p>
+        Dashboard component में <code>&lt;Outlet /&gt;</code> डालना जरूरी है:
+      </p>
+      <pre><code>function Dashboard() {
+  return (
+    &lt;div&gt;
+      &lt;h2&gt;Dashboard&lt;/h2&gt;
+      &lt;Outlet /&gt;
+    &lt;/div&gt;
+  );
+}</code></pre>
+    </div>
+
+    <div class="time-section">
+      <h2 class="time-marker">
+        <span class="time-icon">⏱</span> 45:00 – 50:00 मिनट
+      </h2>
+      <h3>Live Demo of Nested Routing</h3>
+      <div class="demo">
+        <p><strong>Step-by-Step:</strong></p>
+        <ol>
+          <li>Create Dashboard component</li>
+          <li>Add Profile and Settings components</li>
+          <li>Setup routes in App.js</li>
+          <li>Add Outlet to Dashboard</li>
+          <li>Test navigation</li>
+        </ol>
+      </div>
+    </div>
+
+    <div class="time-section">
+      <h2 class="time-marker">
+        <span class="time-icon">⏱</span> 50:00 – 55:00 मिनट
+      </h2>
+      <h3>Revision & Doubts</h3>
+      <p><strong>Discussion Questions:</strong></p>
+      <ul>
+        <li>React Router क्या है?</li>
+        <li>Basic routing कैसे की जाती है?</li>
+        <li>404 page क्यों और कैसे बनाते हैं?</li>
+        <li>Nested routing कब use होती है?</li>
+        <li>Link और anchor tag में क्या अंतर है?</li>
+      </ul>
+    </div>
+
+    <div class="time-section homework">
+      <h2 class="time-marker">
+        <span class="time-icon">⏱</span> 55:00 – 60:00 मिनट
+      </h2>
+      <h3>Homework / Practical Task</h3>
+      <p><strong>Requirements:</strong></p>
+      <ol>
+        <li>तीन pages बनाएं: Home, Contact, Services</li>
+        <li>Navigation bar में Link add करें</li>
+        <li>404 page implement करें</li>
+        <li>Bonus: nested route बनाएं /services/web और /services/app</li>
+      </ol>
+      <p>
+        <strong>Teaching Tip:</strong> Concepts को live demonstration से connect
+        करें। Students को assignment ज़रूर दें।
+      </p>
+    </div>
+  </body>
+</html>
