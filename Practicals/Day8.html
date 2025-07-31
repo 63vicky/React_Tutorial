@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>React टास्क मैनेजर प्रोजेक्ट</title>
+    <style>
+      body {
+        font-family: 'Segoe UI', 'Nirmala UI', Tahoma, Geneva, Verdana,
+          sans-serif;
+        line-height: 1.6;
+        color: #333;
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 20px;
+        background-color: #f9f9f9;
+      }
+      h1 {
+        color: #61dafb;
+        text-align: center;
+        border-bottom: 2px solid #61dafb;
+        padding-bottom: 10px;
+      }
+      h2 {
+        color: #20232a;
+        margin-top: 30px;
+        border-left: 4px solid #61dafb;
+        padding-left: 10px;
+      }
+      .card {
+        background: white;
+        border-radius: 8px;
+        padding: 20px;
+        margin: 15px 0;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 15px 0;
+      }
+      th,
+      td {
+        border: 1px solid #ddd;
+        padding: 8px;
+        text-align: left;
+      }
+      th {
+        background-color: #61dafb;
+        color: white;
+      }
+      tr:nth-child(even) {
+        background-color: #f2f2f2;
+      }
+      .feature-list {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+        gap: 10px;
+        margin: 15px 0;
+      }
+      .feature {
+        background: #e3f2fd;
+        padding: 10px;
+        border-radius: 4px;
+        display: flex;
+        align-items: center;
+      }
+      .feature:before {
+        content: '✓';
+        margin-right: 8px;
+        color: #4caf50;
+        font-weight: bold;
+      }
+      .steps {
+        counter-reset: step-counter;
+      }
+      .step {
+        position: relative;
+        padding-left: 40px;
+        margin-bottom: 20px;
+      }
+      .step:before {
+        counter-increment: step-counter;
+        content: counter(step-counter);
+        position: absolute;
+        left: 0;
+        top: 0;
+        background: #61dafb;
+        color: white;
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: bold;
+      }
+      .hindi {
+        font-family: 'Nirmala UI', sans-serif;
+      }
+      .language-tabs {
+        display: flex;
+        margin-bottom: 15px;
+      }
+      .language-tab {
+        padding: 8px 16px;
+        background: #e0e0e0;
+        border: none;
+        cursor: pointer;
+        margin-right: 5px;
+        border-radius: 4px 4px 0 0;
+      }
+      .language-tab.active {
+        background: #61dafb;
+        color: white;
+      }
+      .language-content {
+        display: none;
+      }
+      .language-content.active {
+        display: block;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="language-tabs">
+      <button class="language-tab active" onclick="showLanguage('english')">
+        English
+      </button>
+      <button class="language-tab" onclick="showLanguage('hindi')">
+        हिंदी
+      </button>
+    </div>
+
+    <!-- English Content -->
+    <div id="english" class="language-content active">
+      <h1>React Task Manager Project</h1>
+
+      <div class="card">
+        <h2>🎯 Project Goal</h2>
+        <p>
+          Build a Task Manager application that helps you understand and apply
+          React Hooks in a real-world scenario.
+        </p>
+      </div>
+
+      <div class="card">
+        <h2>🔧 What You'll Learn (React Hooks in Action)</h2>
+        <table>
+          <tr>
+            <th>Hook</th>
+            <th>Purpose in Project</th>
+          </tr>
+          <tr>
+            <td><code>useState</code></td>
+            <td>Manage tasks state (add/delete/toggle)</td>
+          </tr>
+          <tr>
+            <td><code>useEffect</code></td>
+            <td>Save/load tasks from localStorage</td>
+          </tr>
+          <tr>
+            <td><code>useRef</code></td>
+            <td>Auto-focus input on page load</td>
+          </tr>
+          <tr>
+            <td><code>useMemo</code></td>
+            <td>Efficiently count completed tasks</td>
+          </tr>
+          <tr>
+            <td><code>useCallback</code></td>
+            <td>Optimize functions passed to children</td>
+          </tr>
+        </table>
+      </div>
+
+      <div class="card">
+        <h2>🧱 Project Structure</h2>
+        <ul>
+          <li>Task input field with add button</li>
+          <li>List of tasks with checkboxes</li>
+          <li>Delete button for each task</li>
+          <li>Completed tasks counter</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h2>🧑‍🏫 Implementation Steps</h2>
+        <div class="steps">
+          <div class="step">
+            <strong>Initialize task state</strong>
+            <p>
+              Create state to store tasks array with id, text, and completed
+              status.
+            </p>
+          </div>
+
+          <div class="step">
+            <strong>Implement input auto-focus</strong>
+            <p>Use useRef to focus the input field on component mount.</p>
+          </div>
+
+          <div class="step">
+            <strong>Create task addition logic</strong>
+            <p>Implement add function with proper state updates.</p>
+          </div>
+
+          <div class="step">
+            <strong>Add persistence</strong>
+            <p>Save tasks to localStorage on change and load on mount.</p>
+          </div>
+
+          <div class="step">
+            <strong>Display completed count</strong>
+            <p>Calculate and show completed tasks count efficiently.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <h2>🧪 Expected Features</h2>
+        <div class="feature-list">
+          <div class="feature">Add tasks</div>
+          <div class="feature">Delete tasks</div>
+          <div class="feature">Toggle completion</div>
+          <div class="feature">Persist tasks</div>
+          <div class="feature">Show completed count</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Hindi Content -->
+    <div id="hindi" class="language-content hindi">
+      <h1 class="hindi">React टास्क मैनेजर प्रोजेक्ट</h1>
+
+      <div class="card">
+        <h2 class="hindi">🎯 प्रोजेक्ट का लक्ष्य</h2>
+        <p class="hindi">
+          एक टास्क मैनेजर एप्लिकेशन बनाएं जो React Hooks को वास्तविक परिदृश्य
+          में समझने और लागू करने में मदद करे।
+        </p>
+      </div>
+
+      <div class="card">
+        <h2 class="hindi">🔧 आप क्या सीखेंगे (React Hooks का प्रयोग)</h2>
+        <table>
+          <tr class="hindi">
+            <th>हुक</th>
+            <th>प्रोजेक्ट में उपयोग</th>
+          </tr>
+          <tr class="hindi">
+            <td><code>useState</code></td>
+            <td>टास्क्स की स्टेट मैनेज करना (जोड़ना/हटाना/टॉगल करना)</td>
+          </tr>
+          <tr class="hindi">
+            <td><code>useEffect</code></td>
+            <td>localStorage से टास्क्स सहेजना/लोड करना</td>
+          </tr>
+          <tr class="hindi">
+            <td><code>useRef</code></td>
+            <td>पेज लोड होते ही इनपुट पर फोकस करना</td>
+          </tr>
+          <tr class="hindi">
+            <td><code>useMemo</code></td>
+            <td>पूर्ण हुए टास्क्स की कुशल गणना</td>
+          </tr>
+          <tr class="hindi">
+            <td><code>useCallback</code></td>
+            <td>
+              चाइल्ड कॉम्पोनेंट्स को पास होने वाले फंक्शन्स को ऑप्टिमाइज़ करना
+            </td>
+          </tr>
+        </table>
+      </div>
+
+      <div class="card">
+        <h2 class="hindi">🧱 प्रोजेक्ट संरचना</h2>
+        <ul class="hindi">
+          <li>टास्क इनपुट फील्ड और एड बटन</li>
+          <li>चेकबॉक्स के साथ टास्क्स की सूची</li>
+          <li>प्रत्येक टास्क के लिए डिलीट बटन</li>
+          <li>पूर्ण हुए टास्क्स का काउंटर</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h2 class="hindi">🧑‍🏫 कार्यान्वयन चरण</h2>
+        <div class="steps">
+          <div class="step hindi">
+            <strong>टास्क स्टेट इनिशियलाइज़ करें</strong>
+            <p>
+              id, text और completed स्टेटस के साथ टास्क्स एरे को स्टोर करने के
+              लिए स्टेट बनाएं।
+            </p>
+          </div>
+
+          <div class="step hindi">
+            <strong>इनपुट ऑटो-फोकस लागू करें</strong>
+            <p>
+              कॉम्पोनेंट माउंट होने पर इनपुट फील्ड पर फोकस करने के लिए useRef का
+              उपयोग करें।
+            </p>
+          </div>
+
+          <div class="step hindi">
+            <strong>टास्क जोड़ने की लॉजिक बनाएं</strong>
+            <p>उचित स्टेट अपडेट के साथ एड फंक्शन को लागू करें।</p>
+          </div>
+
+          <div class="step hindi">
+            <strong>स्थायित्व जोड़ें</strong>
+            <p>
+              बदलाव पर टास्क्स को localStorage में सहेजें और माउंट होने पर लोड
+              करें।
+            </p>
+          </div>
+
+          <div class="step hindi">
+            <strong>पूर्ण टास्क्स की संख्या दिखाएं</strong>
+            <p>पूर्ण हुए टास्क्स की कुशलतापूर्वक गणना करके दिखाएं।</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <h2 class="hindi">🧪 अपेक्षित फीचर्स</h2>
+        <div class="feature-list">
+          <div class="feature hindi">टास्क जोड़ना</div>
+          <div class="feature hindi">टास्क हटाना</div>
+          <div class="feature hindi">पूर्ण/अपूर्ण टॉगल करना</div>
+          <div class="feature hindi">टास्क्स को स्थायी रूप से सहेजना</div>
+          <div class="feature hindi">पूर्ण टास्क्स की संख्या दिखाना</div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      function showLanguage(lang) {
+        // Hide all language contents
+        document.querySelectorAll('.language-content').forEach((content) => {
+          content.classList.remove('active');
+        });
+
+        // Show selected language content
+        document.getElementById(lang).classList.add('active');
+
+        // Update tab styles
+        document.querySelectorAll('.language-tab').forEach((tab) => {
+          tab.classList.remove('active');
+        });
+        event.target.classList.add('active');
+      }
+    </script>
+  </body>
+</html>

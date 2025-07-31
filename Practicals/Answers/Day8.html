@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>React Task Manager Solution</title>
+    <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <style>
+      body {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        line-height: 1.6;
+        color: #333;
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 20px;
+        background-color: #f9f9f9;
+      }
+      h1 {
+        color: #61dafb;
+        text-align: center;
+        border-bottom: 2px solid #61dafb;
+        padding-bottom: 10px;
+      }
+      .container {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+      }
+      .solution-container {
+        background: white;
+        border-radius: 8px;
+        padding: 20px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      }
+      .demo-container {
+        background: #f0f8ff;
+        border-radius: 8px;
+        padding: 20px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      }
+      .toggle-btn {
+        background: #61dafb;
+        color: white;
+        border: none;
+        padding: 10px 15px;
+        border-radius: 4px;
+        cursor: pointer;
+        font-weight: bold;
+        margin-bottom: 15px;
+      }
+      .toggle-btn:hover {
+        background: #4fa8d3;
+      }
+      .task-input {
+        display: flex;
+        gap: 10px;
+        margin-bottom: 20px;
+      }
+      .task-input input {
+        flex: 1;
+        padding: 10px;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        font-size: 16px;
+      }
+      .task-input button {
+        padding: 10px 15px;
+        background: #61dafb;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+      }
+      .task-list {
+        list-style: none;
+        padding: 0;
+      }
+      .task-item {
+        display: flex;
+        align-items: center;
+        padding: 10px;
+        border-bottom: 1px solid #eee;
+      }
+      .task-item.completed {
+        opacity: 0.7;
+      }
+      .task-item.completed .task-text {
+        text-decoration: line-through;
+      }
+      .task-checkbox {
+        margin-right: 10px;
+      }
+      .task-text {
+        flex: 1;
+      }
+      .delete-btn {
+        background: #ff6b6b;
+        color: white;
+        border: none;
+        padding: 5px 10px;
+        border-radius: 4px;
+        cursor: pointer;
+      }
+      .summary {
+        margin-top: 20px;
+        font-style: italic;
+        color: #666;
+      }
+      pre {
+        background: #282c34;
+        color: #abb2bf;
+        padding: 15px;
+        border-radius: 6px;
+        overflow-x: auto;
+      }
+      .hidden {
+        display: none;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>React Task Manager Solution</h1>
+
+    <div class="container">
+      <button class="toggle-btn" onclick="toggleSolution()">
+        Toggle Solution/Demo
+      </button>
+
+      <div id="solution" class="solution-container">
+        <h2>Complete Solution Code</h2>
+        <pre><code class="language-jsx">
+// TaskManager.jsx
+function TaskManager() {
+    const [tasks, setTasks] = React.useState([]);
+    const [taskText, setTaskText] = React.useState("");
+    const inputRef = React.useRef(null);
+    
+    // Load tasks from localStorage on initial render
+    React.useEffect(() => {
+        const savedTasks = JSON.parse(localStorage.getItem("tasks"));
+        if (savedTasks) setTasks(savedTasks);
+        inputRef.current.focus();
+    }, []);
+    
+    // Save tasks to localStorage whenever they change
+    React.useEffect(() => {
+        localStorage.setItem("tasks", JSON.stringify(tasks));
+    }, [tasks]);
+    
+    // Memoized count of completed tasks
+    const completedCount = React.useMemo(() => {
+        return tasks.filter(task => task.completed).length;
+    }, [tasks]);
+    
+    // Callback for adding a new task
+    const addTask = React.useCallback(() => {
+        if (taskText.trim()) {
+            setTasks([...tasks, {
+                id: Date.now(),
+                text: taskText,
+                completed: false
+            }]);
+            setTaskText("");
+        }
+    }, [taskText, tasks]);
+    
+    // Toggle task completion status
+    const toggleTask = (taskId) => {
+        setTasks(tasks.map(task => 
+            task.id === taskId ? {...task, completed: !task.completed} : task
+        ));
+    };
+    
+    // Delete a task
+    const deleteTask = (taskId) => {
+        setTasks(tasks.filter(task => task.id !== taskId));
+    };
+    
+    return (
+        &lt;div&gt;
+            &lt;div className="task-input"&gt;
+                &lt;input
+                    type="text"
+                    value={taskText}
+                    onChange={(e) => setTaskText(e.target.value)}
+                    onKeyPress={(e) => e.key === "Enter" && addTask()}
+                    ref={inputRef}
+                    placeholder="Enter a new task"
+                /&gt;
+                &lt;button onClick={addTask}&gt;Add Task&lt;/button&gt;
+            &lt;/div&gt;
+            
+            &lt;ul className="task-list"&gt;
+                {tasks.map(task => (
+                    &lt;li key={task.id} className={`task-item ${task.completed ? "completed" : ""}`}&gt;
+                        &lt;input
+                            type="checkbox"
+                            className="task-checkbox"
+                            checked={task.completed}
+                            onChange={() => toggleTask(task.id)}
+                        /&gt;
+                        &lt;span className="task-text"&gt;{task.text}&lt;/span&gt;
+                        &lt;button className="delete-btn" onClick={() => deleteTask(task.id)}&gt;
+                            Delete
+                        &lt;/button&gt;
+                    &lt;/li&gt;
+                ))}
+            &lt;/ul&gt;
+            
+            &lt;div className="summary"&gt;
+                {tasks.length > 0 ? (
+                    &lt;p&gt;{completedCount} of {tasks.length} tasks completed&lt;/p&gt;
+                ) : (
+                    &lt;p&gt;No tasks yet. Add some tasks!&lt;/p&gt;
+                )}
+            &lt;/div&gt;
+        &lt;/div&gt;
+    );
+}
+            </code></pre>
+      </div>
+
+      <div id="demo" class="demo-container hidden">
+        <h2>Live Demo</h2>
+        <div id="app-root"></div>
+      </div>
+    </div>
+
+    <script type="text/babel">
+      function TaskManager() {
+        const [tasks, setTasks] = React.useState([]);
+        const [taskText, setTaskText] = React.useState('');
+        const inputRef = React.useRef(null);
+
+        React.useEffect(() => {
+          const savedTasks = JSON.parse(localStorage.getItem('tasks'));
+          if (savedTasks) setTasks(savedTasks);
+          inputRef.current.focus();
+        }, []);
+
+        React.useEffect(() => {
+          localStorage.setItem('tasks', JSON.stringify(tasks));
+        }, [tasks]);
+
+        const completedCount = React.useMemo(() => {
+          return tasks.filter((task) => task.completed).length;
+        }, [tasks]);
+
+        const addTask = React.useCallback(() => {
+          if (taskText.trim()) {
+            setTasks([
+              ...tasks,
+              {
+                id: Date.now(),
+                text: taskText,
+                completed: false,
+              },
+            ]);
+            setTaskText('');
+          }
+        }, [taskText, tasks]);
+
+        const toggleTask = (taskId) => {
+          setTasks(
+            tasks.map((task) =>
+              task.id === taskId
+                ? { ...task, completed: !task.completed }
+                : task
+            )
+          );
+        };
+
+        const deleteTask = (taskId) => {
+          setTasks(tasks.filter((task) => task.id !== taskId));
+        };
+
+        return (
+          <div>
+            <div className="task-input">
+              <input
+                type="text"
+                value={taskText}
+                onChange={(e) => setTaskText(e.target.value)}
+                onKeyPress={(e) => e.key === 'Enter' && addTask()}
+                ref={inputRef}
+                placeholder="Enter a new task"
+              />
+              <button onClick={addTask}>Add Task</button>
+            </div>
+
+            <ul className="task-list">
+              {tasks.map((task) => (
+                <li
+                  key={task.id}
+                  className={`task-item ${task.completed ? 'completed' : ''}`}
+                >
+                  <input
+                    type="checkbox"
+                    className="task-checkbox"
+                    checked={task.completed}
+                    onChange={() => toggleTask(task.id)}
+                  />
+                  <span className="task-text">{task.text}</span>
+                  <button
+                    className="delete-btn"
+                    onClick={() => deleteTask(task.id)}
+                  >
+                    Delete
+                  </button>
+                </li>
+              ))}
+            </ul>
+
+            <div className="summary">
+              {tasks.length > 0 ? (
+                <p>
+                  {completedCount} of {tasks.length} tasks completed
+                </p>
+              ) : (
+                <p>No tasks yet. Add some tasks!</p>
+              )}
+            </div>
+          </div>
+        );
+      }
+
+      function toggleSolution() {
+        const solution = document.getElementById('solution');
+        const demo = document.getElementById('demo');
+
+        if (solution.classList.contains('hidden')) {
+          solution.classList.remove('hidden');
+          demo.classList.add('hidden');
+        } else {
+          solution.classList.add('hidden');
+          demo.classList.remove('hidden');
+        }
+      }
+
+      const root = ReactDOM.createRoot(document.getElementById('app-root'));
+      root.render(<TaskManager />);
+    </script>
+  </body>
+</html>
